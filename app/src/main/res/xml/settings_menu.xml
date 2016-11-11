@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:key="application_settings_provider"
+        android:title="@string/preference_category_serviceSettings_title" >
+
+        <EditTextPreference
+            android:key="service_provider"
+            android:defaultValue="@string/default_url"
+            android:title="@string/preference_category_serviceAddress_title"
+            android:summary="@string/preference_category_serviceAddress_summary"
+            android:dialogTitle="@string/preference_category_serviceAddress_dialogTitle"
+            android:hint="@string/preference_category_serviceAddress_hint">
+        </EditTextPreference>
+
+    </PreferenceCategory>
+
+
+
+
+
+</PreferenceScreen>

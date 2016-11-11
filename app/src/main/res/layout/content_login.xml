@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.LoginActivity"
+    tools:showIn="@layout/activity_login">
+
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/log_hint_mail"
+        android:layout_above="@+id/etPassword"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/log_hint_password"
+        android:inputType="textPassword"
+        android:layout_above="@+id/bSignIn"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/bSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/log_text_accedi"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/tvRegisterLink"
+        android:layout_alignEnd="@+id/tvRegisterLink"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/log_text_registra"
+        android:id="@+id/tvRegisterLink"
+        android:layout_below="@+id/remember_checkBox"
+        android:layout_centerHorizontal="true"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remember_checkbox"
+        android:id="@+id/remember_checkBox"
+        android:layout_below="@+id/bSignIn"
+        android:layout_centerHorizontal="true"
+        android:checked="false"/>
+
+</RelativeLayout>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context=".activities.RegisterActivity"
+            tools:showIn="@layout/activity_register">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:id="@+id/layout_main">
+
+        <TextView android:id="@+id/first_line"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/first_line"
+                  android:textColor="@color/colorStrings"
+                  android:layout_centerHorizontal="true"
+                  android:textSize="20sp"/>
+
+        <TextView android:id="@+id/second_line"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/second_line"
+                  android:textColor="@color/colorStrings"
+                  android:layout_centerHorizontal="true"
+                  android:layout_below="@+id/first_line"/>
+
+        <TextView android:id="@+id/third_line"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text=""
+                  android:layout_centerHorizontal="true"
+                  android:layout_below="@+id/second_line"
+                  android:textSize="20sp"/>
+
+        <EditText android:id="@+id/user_first_name"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/first_name_hint"
+                  android:layout_below="@+id/third_line"/>
+
+        <EditText android:id="@+id/user_last_name"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/last_name_hint"
+                  android:layout_below="@+id/user_first_name" />
+
+        <EditText android:id="@+id/user_email"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/email_hint"
+                  android:layout_below="@+id/user_last_name" />
+
+        <EditText android:id="@+id/user_password"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/password_hint"
+                  android:inputType="textPassword"
+                  android:layout_below="@+id/user_email" />
+
+        <EditText android:id="@+id/check_password"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/check_password_hint"
+                  android:inputType="textPassword"
+                  android:layout_below="@+id/user_password" />
+
+        <TextView android:id="@+id/space_one"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="20sp"
+                  android:layout_below="@+id/check_password" />
+
+        <TextView android:id="@+id/sex_label"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:paddingRight="43dp"
+                  android:paddingBottom="50dp"
+                  android:text="@string/tv_sex"
+                  android:textSize="16sp"
+                  android:layout_below="@+id/space_one" />
+
+        <Spinner android:id="@+id/user_sex"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="@string/sex_spinner_text"
+                 android:drawSelectorOnTop="true"
+                 android:entries="@array/sex_list"
+                 android:layout_toRightOf="@+id/sex_label"
+                 android:layout_below="@+id/space_one"
+                 style="@android:style/Widget.Holo.Light.Spinner"/>
+
+        <TextView android:id="@+id/space_three"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="20sp"
+                  android:layout_below="@+id/sex_label" />
+
+        <TextView android:id="@+id/spec_label"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:paddingRight="43dp"
+                  android:paddingBottom="50dp"
+                  android:text="@string/tv_specializazzione"
+                  android:textSize="16sp"
+                  android:layout_below="@+id/space_three" />
+
+        <Spinner android:id="@+id/user_spec"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="@string/spec_spinner_text"
+                 android:drawSelectorOnTop="true"
+                 android:layout_toRightOf="@+id/spec_label"
+                 android:layout_below="@+id/space_three" />
+
+        <TextView android:id="@+id/date_label"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:paddingBottom="430dp"
+                  android:paddingRight="5dp"
+                  android:text="@string/data_label_text"
+                  android:textSize="16sp"
+                  android:layout_below="@+id/spec_label" />
+        <com.francesco.patientmonitoring.adapters.CustomDatePicker
+            android:id="@+id/user_birthdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/date_label"
+            android:layout_below="@+id/spec_label" />
+
+
+        <EditText android:id="@+id/user_phone"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/tv_phone"
+                  android:inputType="phone"
+                  android:layout_below="@+id/date_label" />
+
+        <TextView android:id="@+id/space_two"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="20sp"
+                  android:layout_below="@+id/user_phone"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_button_next"
+            android:onClick="riepilogo"
+            android:layout_below="@+id/space_two"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+</ScrollView>

@@ -1,0 +1,146 @@
+<resources>
+
+    <!--Titles screens-->
+    <string name="app_name">PatientMonitoringV2</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_visualizza_riepilogo">VisualizzaRiepilogo</string>
+    <string name="home_label">Home</string>
+    <string name="label_parametri">Parametri</string>
+
+    <!-- Service provider settings -->
+    <string name="default_url">http://192.168.173.1:9090</string>
+    <string name="preference_category_serviceSettings_title">Service Provider</string>
+    <string name="preference_category_serviceAddress_title">Indirizzo Service Provider</string>
+    <string name="preference_category_serviceAddress_summary">Inserire indirizzo url del servizio web che fornirà i dati</string>
+    <string name="preference_category_serviceAddress_dialogTitle">Inserisci indirizzo</string>
+    <string name="preference_category_serviceAddress_hint">es. http://192.168.137.1:9090</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <!-- Patient Information -->
+    <string name="name">Nome:</string>
+    <string name="city">Città:</string>
+    <string name="birthdate">Data di nascita:</string>
+
+
+    <!-- Utils -->
+    <string name="go_button">Vai</string>
+    <string name="patient">Paziente</string>
+    <string name="graphics">Grafici</string>
+    <string name="mean_values">Valori Medi</string>
+    <string name="show_values">Mostra valori:</string>
+
+    <!-- Parameters -->
+    <string name="pressione">Pressione</string>
+    <string name="spo2">SpO2</string>
+    <string name="glicemia">Glicemia</string>
+    <string name="massa">Massa</string>
+
+    <!-- Login Activity -->
+    <string name="log_hint_mail">Email</string>
+    <string name="log_hint_password">Password</string>
+    <string name="log_text_accedi">Accedi</string>
+    <string name="log_text_registra">Registrati</string>
+    <string name="toast_user_password_wrong">Errore!\nUsername e/o password errati.</string>
+    <string name="toast_server_wrong">Errore! Possibili cause:\nIndirizzo del server sbagliato;\nIl server è spento;\nAssenza connessione Internet</string>
+    <string name="toast_login_succesful">Il login è andato a buon fine.</string>
+    <string name="attention_message">Attenzione!</string>
+    <string name="remember_checkbox">Ricordami</string>
+    <string name="process_dialog_waiting">Attendere</string>
+
+    <!-- Registration Activity -->
+    <string name="first_line">Inserisci i campi</string>
+    <string name="second_line">(I campi contrassegnati da * sono obbligatori)</string>
+    <string name="first_name_hint">(*) Nome</string>
+    <string name="last_name_hint">(*) Cognome</string>
+    <string name="email_hint">(*) Indirizzo e-mail. L\'indirizzo mail verrà usato come username</string>
+    <string name="password_hint">(*) Password</string>
+    <string name="check_password_hint">(*) Ripeti Password</string>
+    <string name="tv_sex"> (*) Sesso</string>
+    <string name="sex_spinner_text">Sesso</string>
+    <string-array name="sex_list">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="tv_specializazzione"> (*) Specializzazione</string>
+    <string name="spec_spinner_text">Specializzazione</string>
+    <string name="data_label_text"> (*) Data di nascita</string>
+    <string name="tv_phone">(*) Telefono</string>
+    <string name="text_button_next">Continua</string>
+
+    <!-- VisualizzaRiepilogo activity -->
+    <string name="text_reg_button">Registra</string>
+    <string name="utente_registrato_message">Utente già registrato</string>
+    <string name="different_password">La password di controllo non corrisponde a quella inserita!</string>
+    <string name="informations_missing">I campi obbligatori non sono stati tutti compilati!</string>
+
+    <!-- Home activity-->
+    <string name="title_first_tab">Notifiche</string>
+    <string name="title_second_tab">Ricerca Paziente</string>
+    <string name="title_third_tab">Aggiungi promemoria</string>
+
+    <!-- Search Patient activity-->
+    <string name="title_patient_disease">Seleziona le patologie di interesse:</string>
+    <string name="title_patient_name">Nome paziente</string>
+    <string name="subtitle_patient_name">(*  Devono essere rispettate le lettere maiuscole iniziali nel nome e nel cognome)</string>
+    <string name="advice_checkbox_deseases">Selezionando una patologia senza inserire il nome vengono selezionati tutti i pazienti con quella patologia</string>
+    <string name="hint_patient_name">Inserisci nome paziente</string>
+    <string name="button_search">Cerca</string>
+
+    <string name="toast_no_patient">La ricerca non ha prodotto risultati.</string>
+    <string name="toast_no_server">Il Server è spento.</string>
+
+    <!--Home Paziente-->
+    <string name="label_valori_medi">Valori Medi</string>
+    <string name="label_valori_puntuali">Valori Puntuali</string>
+    <string name="label_grafici">Grafici</string>
+
+    <string name="parametri">Parametri</string>
+    <string name="diario_clinico">Diario Clinico</string>
+    <string name="esami_sangue">Esami del Sangue</string>
+
+
+    <!--Parametri Valori Medi-->
+    <string-array name="mean_selector_names">
+        <item>Ultimo Giorno</item>
+        <item>Ultimi Tre Giorni</item>
+        <item>Ultima Settimana</item>
+        <item>Ultime Tre Settimane</item>
+        <item>Ultimo mese</item>
+    </string-array>
+    <string-array name="mean_selector_ids">
+        <item>one_day</item>
+        <item>three_days</item>
+        <item>one_week</item>
+        <item>three_weeks</item>
+        <item>one_month</item>
+    </string-array>
+
+    <!-- Parametri Grafici-->
+    <string-array name="params_ids">
+        <item>press</item>
+        <item>glic</item>
+        <item>spo2</item>
+        <item>mass</item>
+    </string-array>
+
+    <string-array name="params_names">
+        <item>Pressione</item>
+        <item>Glicemia</item>
+        <item>SpO2</item>
+        <item>Massa</item>
+    </string-array>
+
+    <string name="graph_interface_description"> Per selezionare le date del range temporale basta cliccare sui due campi di inserimento. Verrà aperta una finestra dalla quale si può selezionare la data</string>
+
+    <!-- Esami sangue-->
+    <string name="pes1string">Fragment1</string>
+    <string name="pes2string">Fragment2</string>
+    <string name="title_activity_home_paziente_nav_drawer">HomePazienteNavDrawer</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+</resources>

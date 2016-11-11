@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/my_curstom_border">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/patient"
+            style="?android:listSeparatorTextViewStyle"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_nomePaziente"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/city"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_cittàPaziente"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/birthdate"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_birthPaziente"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleziona data:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="10dp"/>
+
+        <DatePicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/params_day"
+            android:calendarViewShown="false"
+            android:padding="-40dp"
+            android:scaleY="0.80"
+            android:scaleX="0.80"
+            android:layout_gravity="center_horizontal"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_date2"
+            android:text="Cerca"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/my_curstom_border">
+    </LinearLayout>
+
+
+</LinearLayout>

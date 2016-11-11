@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="3">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="2.3"
+        android:orientation="vertical">
+
+        <!--for intent values-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/patient"
+            style="?android:listSeparatorTextViewStyle"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_nomePaziente"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_cittàPaziente"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_birthPaziente"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:id="@+id/spinner_params_graph"
+            android:layout_marginTop="20dp"
+            style="@android:style/Widget.Holo.Light.Spinner"/>
+
+        <EditText
+            android:id="@+id/etxt_fromdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Da:" />
+
+        <EditText
+            android:id="@+id/etxt_todate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="A:" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_graphs"
+            android:text="Cerca"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/graph_interface_description"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_weight="0.7">
+
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/graph"/>
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

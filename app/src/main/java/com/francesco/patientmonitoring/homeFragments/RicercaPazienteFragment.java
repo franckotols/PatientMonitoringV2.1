@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -143,7 +142,7 @@ public class RicercaPazienteFragment extends Fragment implements View.OnClickLis
 
         //populating listView
         listView=(ListView)rootview.findViewById(R.id.listv);
-        pazienteAdapter = new PazienteAdapter(getContext(),R.layout.patient_list_layout,physician_id);
+        pazienteAdapter = new PazienteAdapter(getContext(),R.layout.list_layout_patient,physician_id);
         listView.setAdapter(pazienteAdapter);
 
         /**

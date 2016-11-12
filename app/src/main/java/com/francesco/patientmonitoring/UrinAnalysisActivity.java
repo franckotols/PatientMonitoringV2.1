@@ -9,7 +9,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,34 +22,71 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.francesco.patientmonitoring.adapters.PazienteAdapter;
+import com.francesco.patientmonitoring.adapters.UrinMeasureAdapter;
+import com.francesco.patientmonitoring.pojo.Pazienti;
+import com.francesco.patientmonitoring.pojo.UrinMeasure;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class UrinAnalysisActivity extends BaseActivity implements View.OnClickListener {
+public class UrinAnalysisActivity extends BaseActivity {
 
     SharedPreferences pref;
     public static final String KEY_PAT_ID = "pat_id";
     private String pat_id;
-    private Button searchUrinAnalysis;
+
 
     TextView tvNome;
     TextView tvCity;
     TextView tvBirthdate;
+
+    /**
+     * Per rilevare la risposta del server e creare gli elementi per la ListView
+     */
+    private JSONObject jsonServerResp;
+    UrinMeasureAdapter mUrinMeasureAdapter;
+    ListView listView;
+
+    /*
+     * TextViews Parametri Del Test delle Urine
+     */
+    TextView tvDateMeas;
+    TextView tvBil;
+    TextView tvPro;
+    TextView tvUro;
+    TextView tvBlo;
+    TextView tvLeu;
+    TextView tvPh;
+    TextView tvKet;
+    TextView tvSg;
+    TextView tvGlu;
+    TextView tvNit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_urin_analysis);
 
-        searchUrinAnalysis = (Button)findViewById(R.id.search_urin_analysis);
-        searchUrinAnalysis.setOnClickListener(this);
+
+
+        listView=(ListView)findViewById(R.id.list_urin);
+        mUrinMeasureAdapter = new UrinMeasureAdapter(this,R.layout.list_layout_urin_measure);
+        listView.setAdapter(mUrinMeasureAdapter);
 
         Intent i = getIntent();
         pat_id = i.getStringExtra("id");
         final String nome = i.getStringExtra("nome");
         final String city = i.getStringExtra("città");
         final String birthdate = i.getStringExtra("data_di_nascita");
+
+        setTitle(nome+" - Analisi Urine");
+
         tvNome = (TextView)findViewById(R.id.tv_nomePaziente);
         tvCity = (TextView)findViewById(R.id.tv_cittàPaziente);
         tvBirthdate = (TextView)findViewById(R.id.tv_birthPaziente);
@@ -57,7 +96,51 @@ public class UrinAnalysisActivity extends BaseActivity implements View.OnClickLi
         /*
          * POST REQUEST TO THE WEB SERVICE
          */
-        //postPatientID();
+        postPatientID();
+
+        /*
+         * Riempimento delle TextView relative ai parametri
+         */
+        tvDateMeas = (TextView)findViewById(R.id.date_urin_meas);
+        tvBil = (TextView)findViewById(R.id.bil_tv);
+        tvPro = (TextView)findViewById(R.id.prot_tv);
+        tvUro = (TextView)findViewById(R.id.uro_tv);
+        tvBlo = (TextView)findViewById(R.id.blood_tv);
+        tvLeu = (TextView)findViewById(R.id.leu_tv);
+        tvPh = (TextView)findViewById(R.id.ph_tv);
+        tvKet = (TextView)findViewById(R.id.ket_tv);
+        tvSg = (TextView)findViewById(R.id.spec_grav_tv);
+        tvGlu = (TextView)findViewById(R.id.glu_tv);
+        tvNit = (TextView)findViewById(R.id.nit_tv);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                UrinMeasure measure = (UrinMeasure) adapterView.getItemAtPosition(i);
+                String date = measure.getDate();
+                String bil = measure.getBil();
+                String pro = measure.getPro();
+                String uro = measure.getUro();
+                String blo = measure.getBlo();
+                String leu = measure.getLeu();
+                String ph = measure.getPh();
+                String ket = measure.getKet();
+                String sg = measure.getSg();
+                String glu = measure.getGlu();
+                String nit = measure.getNit();
+                tvDateMeas.setText(date);
+                tvBil.setText(bil);
+                tvPro.setText(pro);
+                tvUro.setText(uro);
+                tvBlo.setText(blo);
+                tvLeu.setText(leu);
+                tvPh.setText(ph);
+                tvKet.setText(ket);
+                tvSg.setText(sg);
+                tvGlu.setText(glu);
+                tvNit.setText(nit);
+            }
+        });
     }
 
     private void postPatientID() {
@@ -71,7 +154,43 @@ public class UrinAnalysisActivity extends BaseActivity implements View.OnClickLi
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(UrinAnalysisActivity.this, response, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(UrinAnalysisActivity.this,response,Toast.LENGTH_LONG).show();
+
+                        try {
+                            //trasforma la stringa in oggetto json
+                            jsonServerResp = new JSONObject(response);
+                            JSONArray jsonArray = jsonServerResp.getJSONArray("results");
+                            String date_meas, manufacturer;
+
+                            String bil, pro, uro, blo, leu, ph, ket, sg, glu, nit;
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                                JSONObject measurements = jsonObj.getJSONObject("measurements");
+                                //properties
+                                date_meas = jsonObj.getString("date");
+                                manufacturer = jsonObj.getString("manufacturer");
+                                //values
+                                bil = measurements.getString("bil");
+                                pro = measurements.getString("pro");;
+                                uro = measurements.getString("uro");
+                                blo = measurements.getString("blo");
+                                leu = measurements.getString("leu");
+                                ph = measurements.getString("ph");
+                                ket = measurements.getString("ket");
+                                sg = measurements.getString("sg");
+                                glu = measurements.getString("glu");
+                                nit = measurements.getString("nit");
+
+                                UrinMeasure urinMeasure = new UrinMeasure(date_meas, manufacturer, bil, pro, blo, uro, leu, ph, sg, ket, glu, nit);
+                                mUrinMeasureAdapter.add(urinMeasure);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        mUrinMeasureAdapter.notifyDataSetChanged();
+                        //Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                        //la riga successiva serve perchè altrimenti ad ogni richiesta accumulerebbe
+                        //le patologie selezionate
 
                     }
                 },
@@ -150,11 +269,5 @@ public class UrinAnalysisActivity extends BaseActivity implements View.OnClickLi
 
     }
 
-    @Override
-    public void onClick(View view) {
 
-        if  (view == searchUrinAnalysis){
-            postPatientID();
-        }
-    }
 }

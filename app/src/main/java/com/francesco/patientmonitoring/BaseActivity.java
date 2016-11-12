@@ -137,7 +137,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 i.putExtra("città",city);
                 i.putExtra("data_di_nascita",birthdate);
                 i.putExtra("id",pat_id);
-                //i.putExtra("physician_id",physician_id);
+                i.putExtra("physician_id",physician_id);
                 return true;
             /*
             L'INTERFACCIA DEI PARAMETRI ANCORA NON FUNZIONA
@@ -151,16 +151,25 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 intent.putExtra("physician_id",physician_id);
                 startActivity(intent);
                 return true;
-            */
-            /*
-            case R.id.nav_diary :
-                startActivity(new Intent(this, DiaryActivity.class));
+                */
+
+
+            case R.id.nav_diary_dp :
+                Intent ii = new Intent(this, DiaryDpActivity.class);
+                ii.putExtra("nome",nome);
+                ii.putExtra("città",city);
+                ii.putExtra("data_di_nascita",birthdate);
+                ii.putExtra("id",pat_id);
+                ii.putExtra("physician_id",physician_id);
+                startActivity(ii);
                 return true;
 
+            /*
             case R.id.nav_blood:
                 startActivity(new Intent(this, BloodActivity.class));
                 return true;
-              */
+                */
+
             case R.id.nav_urin_analysis:
                 Intent iii = new Intent(this, UrinAnalysisActivity.class);
                 iii.putExtra("nome",nome);
@@ -169,6 +178,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 iii.putExtra("id",pat_id);
                 iii.putExtra("physician_id",physician_id);
                 startActivity(iii);
+                return true;
 
 
 

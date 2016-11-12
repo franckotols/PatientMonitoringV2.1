@@ -34,26 +34,29 @@
         </activity>
         <activity android:name=".HomeActivity">
         </activity>
-        <activity android:name=".DiarioMedico">
-        </activity>
-        <activity android:name=".EsamiSangue">
-        </activity>
         <activity
             android:name=".sharedPreferences.SettingsActivity"
             android:label="@string/title_activity_settings">
         </activity>
-        <activity android:name=".ParametriActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".ParametriActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".BaseActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".BaseActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".UrinAnalysisActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".UrinAnalysisActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".PhysicianMessagesActivity"
-                  android:theme="@style/AppTheme.NoActionBar"
-                  android:windowSoftInputMode="stateAlwaysHidden">
+        <activity
+            android:name=".PhysicianMessagesActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
+        <activity android:name=".DiaryDpActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

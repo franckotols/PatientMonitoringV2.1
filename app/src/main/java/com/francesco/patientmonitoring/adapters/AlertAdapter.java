@@ -65,7 +65,7 @@ public class AlertAdapter extends ArrayAdapter {
         final Alerts alerts =(Alerts) this.getItem(position);
         if(row == null){
             LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = layoutInflater.inflate(R.layout.alert_list_layout,parent,false);
+            row = layoutInflater.inflate(R.layout.list_layout_alert,parent,false);
             alertHolder = new AlertHolder();
             alertHolder.tx_pat_name = (TextView) row.findViewById(R.id.tv_pat_name);
             alertHolder.tx_date = (TextView) row.findViewById(R.id.tv_date);

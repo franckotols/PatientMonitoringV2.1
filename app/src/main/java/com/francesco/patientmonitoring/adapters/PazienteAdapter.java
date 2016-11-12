@@ -9,10 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.francesco.patientmonitoring.BaseActivity;
-import com.francesco.patientmonitoring.ParametriActivity;
 import com.francesco.patientmonitoring.PhysicianMessagesActivity;
-import com.francesco.patientmonitoring.UrinAnalysisActivity;
 import com.francesco.patientmonitoring.pojo.Pazienti;
 import com.francesco.patientmonitoring.R;
 
@@ -56,7 +53,7 @@ public class PazienteAdapter extends ArrayAdapter {
         PatientHolder patientHolder;
         if(row == null){
             LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = layoutInflater.inflate(R.layout.patient_list_layout,parent,false);
+            row = layoutInflater.inflate(R.layout.list_layout_patient,parent,false);
             patientHolder = new PatientHolder();
             patientHolder.tx_name = (TextView) row.findViewById(R.id.tx_name);
             patientHolder.tx_city = (TextView) row.findViewById(R.id.tx_city);

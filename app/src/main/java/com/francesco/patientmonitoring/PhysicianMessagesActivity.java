@@ -55,7 +55,7 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_physician_messages);
 
-        physician_id = PreferenceManager.getDefaultSharedPreferences(this).getString("physician_id", "defaultStringIfNothingFound");
+        //physician_id = PreferenceManager.getDefaultSharedPreferences(this).getString("physician_id", "defaultStringIfNothingFound");
 
         /*
         From the intent
@@ -63,7 +63,7 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
 
         Intent i = getIntent();
         pat_id = i.getStringExtra("id");
-        //physician_id = i.getStringExtra("physician_id");
+        physician_id = i.getStringExtra("physician_id");
         final String nome = i.getStringExtra("nome");
         final String city = i.getStringExtra("città");
         final String birthdate = i.getStringExtra("data_di_nascita");
@@ -90,34 +90,6 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent settingsIntent = new Intent(PhysicianMessagesActivity.this, SettingsActivity.class);
-            startActivity(settingsIntent);
-        }
-
-        if (id == R.id.action_home) {
-            Intent settingsIntent = new Intent(PhysicianMessagesActivity.this, HomeActivity.class);
-            startActivity(settingsIntent);
-        }
-
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onClick(View view) {

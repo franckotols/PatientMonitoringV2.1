@@ -21,7 +21,7 @@ import com.francesco.patientmonitoring.fragmentParametri.ParametriValoriPuntuali
 import java.util.List;
 import java.util.Vector;
 
-public class ParametriActivity extends BaseActivity{
+public class ParametriActivity extends BaseActivity {
 
     private String nome;
 
@@ -49,7 +49,10 @@ public class ParametriActivity extends BaseActivity{
         final ViewPager pager = (ViewPager) findViewById(R.id.viewPager_home_paziente);
         pager.setAdapter(adapter);
 
+
         final ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         ActionBar.TabListener tabListener = new ActionBar.TabListener(){
@@ -82,6 +85,7 @@ public class ParametriActivity extends BaseActivity{
                 actionBar.setSelectedNavigationItem(position);
             }
         });
+
 
 
 

@@ -60,7 +60,7 @@ public class NotificheFragment extends Fragment {
 
         //populating listView
         listView=(ListView)rootview.findViewById(R.id.listv_alerts);
-        alertAdapter = new AlertAdapter(getContext(),R.layout.alert_list_layout);
+        alertAdapter = new AlertAdapter(getContext(),R.layout.list_layout_alert);
         listView.setAdapter(alertAdapter);
 
         /**

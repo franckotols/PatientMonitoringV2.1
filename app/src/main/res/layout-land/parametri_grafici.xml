@@ -46,17 +46,13 @@
             android:layout_marginTop="20dp"
             style="@android:style/Widget.Holo.Light.Spinner"/>
 
-        <EditText
-            android:id="@+id/etxt_fromdate"
+        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Da:" />
-
-        <EditText
-            android:id="@+id/etxt_todate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="A:" />
+            android:drawSelectorOnTop="true"
+            android:id="@+id/spinner_date_interval"
+            android:layout_marginTop="20dp"
+            style="@android:style/Widget.Holo.Light.Spinner"/>
 
         <Button
             android:layout_width="wrap_content"

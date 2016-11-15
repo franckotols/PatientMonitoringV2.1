@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.francesco.patientmonitoring.R;
 import com.francesco.patientmonitoring.pojo.SpinnerParams;
+import com.francesco.patientmonitoring.utilities.PatientInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,11 +38,11 @@ import java.util.Map;
  */
 public class ParametriValoriMediFragment extends Fragment {
 
-    //TextView tvNome;
-    //TextView tvCity;
-    //TextView tvBirthdate;
-    Button searchButton;
-    Spinner meanSelectorSpinner;
+    TextView tvNome;
+    TextView tvCity;
+    TextView tvBirthdate;
+    Button searchMeanValuesButton;
+    //Spinner meanSelectorSpinner;
     SpinnerParams p;
     ArrayList<SpinnerParams> params;
     SharedPreferences pref;
@@ -57,20 +59,28 @@ public class ParametriValoriMediFragment extends Fragment {
          * Riempimento delle textView relative alle info del paziente
          * Mi serve anche l'id del paziente
          */
-        Intent i = getActivity().getIntent();
-        final String nome = i.getStringExtra("nome");
-        final String city = i.getStringExtra("città");
-        final String birthdate = i.getStringExtra("data_di_nascita");
-        final String id_pat = i.getStringExtra("id");
-        //tvNome = (TextView)rootview.findViewById(R.id.tv_nomePaziente);
-        //tvCity = (TextView)rootview.findViewById(R.id.tv_cittàPaziente);
-        //tvBirthdate = (TextView)rootview.findViewById(R.id.tv_birthPaziente);
-        //tvNome.setText(nome);
-        //tvCity.setText(city);
-        //tvBirthdate.setText(birthdate);
+        final String id_pat = PatientInfo.getPatient_id();
+        final String nome = PatientInfo.getPatient_name();
+        final String city = PatientInfo.getPatient_city();
+        final String birthdate = PatientInfo.getPatient_birthdate();
+        tvNome = (TextView)rootview.findViewById(R.id.tv_nomePaziente);
+        tvCity = (TextView)rootview.findViewById(R.id.tv_cittàPaziente);
+        tvBirthdate = (TextView)rootview.findViewById(R.id.tv_birthPaziente);
+        tvNome.setText(nome);
+        tvCity.setText(city);
+        tvBirthdate.setText(birthdate);
+
+        searchMeanValuesButton = (Button)rootview.findViewById(R.id.search_mean_values);
+        searchMeanValuesButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                sendParams(id_pat);
+
+            }
+        });
         /*
          * Spinner Configuration
-         */
+
         params = setData();
         meanSelectorSpinner  = (Spinner)rootview.findViewById(R.id.mean_selector_spinner);
         ArrayAdapter<SpinnerParams> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_dropdown_item,params);
@@ -92,10 +102,12 @@ public class ParametriValoriMediFragment extends Fragment {
                 /*
                  * POST FUNCTION
                  */
+        /*
                 sendParams(id_pat,mean_interval);
                 //Toast.makeText(getActivity(),"ID: "+p.getId()+",  Name : "+p.getName(),Toast.LENGTH_LONG).show();
             }
         });
+        */
 
 
         return rootview;
@@ -112,16 +124,16 @@ public class ParametriValoriMediFragment extends Fragment {
         return params;
     }
 
-    private void sendParams(final String id_pat, final String mean_interval) {
+    private void sendParams(final String id_pat) {
 
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String url = pref.getString("service_provider", "");
-        final String final_addr = url+"/parametri/valorimedi";
+        final String final_addr = url+"/api/parameters/meanvalues";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, final_addr,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(), "params putted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -159,10 +171,10 @@ public class ParametriValoriMediFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_pat", id_pat);
-                params.put("mean_interval", mean_interval);
                 return params;
             }
         };
+
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
     }

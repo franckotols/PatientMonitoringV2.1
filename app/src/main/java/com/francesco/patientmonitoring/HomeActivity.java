@@ -36,11 +36,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         setTitle("Home");
 
-        //per tenere in memoria l'id del paziente!
-        Intent i = getIntent();
-        physician_id = i.getStringExtra("physician_id");
-        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("physician_id", physician_id).commit();
-
         List<Fragment> fragments =new Vector<>();
         fragments.add(Fragment.instantiate(this, NotificheFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, RicercaPazienteFragment.class.getName()));

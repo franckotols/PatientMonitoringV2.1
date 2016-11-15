@@ -9,11 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.francesco.patientmonitoring.HomePazienteActivity;
 import com.francesco.patientmonitoring.PhysicianMessagesActivity;
 import com.francesco.patientmonitoring.pojo.Pazienti;
 import com.francesco.patientmonitoring.R;
+import com.francesco.patientmonitoring.utilities.PatientInfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -65,12 +68,30 @@ public class PazienteAdapter extends ArrayAdapter {
                     /**
                      * per passare all'activity specifica del paziente
                      */
-                    Intent intent= new Intent(getContext(), PhysicianMessagesActivity.class);
-                    intent.putExtra("nome",pazienti.getFull_name());
-                    intent.putExtra("città",pazienti.getCittà());
-                    intent.putExtra("data_di_nascita",pazienti.getBirthdate());
-                    intent.putExtra("id",pazienti.getPat_id());
-                    intent.putExtra("physician_id",mString);
+                    PatientInfo.setPatient_name(pazienti.getFull_name());
+                    PatientInfo.setPatient_city(pazienti.getCittà());
+                    PatientInfo.setPatient_birthdate(pazienti.getBirthdate());
+                    PatientInfo.setPatient_id(pazienti.getPat_id());
+
+                    boolean[] reset = {false, false, false, false, false, false, false, false};
+                    PatientInfo.setDiseases(reset);
+                    PatientInfo.setList(pazienti.getList_disease());
+                    ArrayList<String> list_dis = pazienti.getList_disease();
+                    if(list_dis.contains("Dialisi Peritoneale")){
+                        PatientInfo.getDiseases()[PatientInfo.Disease.peritoneale.ordinal()] = true;
+                    }
+                    else if(list_dis.contains("Emodialisi")){
+                        PatientInfo.getDiseases()[PatientInfo.Disease.emodialisi.ordinal()] = true;
+                    }
+                    else if(list_dis.contains("Esami del Sangue")){
+                        PatientInfo.getDiseases()[PatientInfo.Disease.sangue.ordinal()] = true;
+                    }
+                    else if (list_dis.contains("Test delle Urine")){
+                        PatientInfo.getDiseases()[PatientInfo.Disease.urine.ordinal()] = true;
+                    }
+
+
+                    Intent intent= new Intent(getContext(), HomePazienteActivity.class);
                     getContext().startActivity(intent);
 
                 }
@@ -85,6 +106,7 @@ public class PazienteAdapter extends ArrayAdapter {
         patientHolder.tx_name.setText(pazienti.getFull_name());
         patientHolder.tx_city.setText(pazienti.getCittà());
         patientHolder.tx_birthdate.setText(pazienti.getBirthdate());
+
 
         return row;
     }

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -30,7 +31,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.francesco.patientmonitoring.R;
 import com.francesco.patientmonitoring.pojo.SpinnerParams;
+import com.francesco.patientmonitoring.utilities.PatientInfo;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -38,9 +42,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,19 +66,27 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
     String toDateStr;
 
     Spinner paramSelectorSpinner;
+    Spinner dateIntervalSelectorSpinner;
     Button searchButton;
-    SpinnerParams p;
+    SpinnerParams paramSpinner;
+    SpinnerParams intervalSpinner;
     ArrayList<SpinnerParams> params;
+    ArrayList<SpinnerParams> intervals;
     SharedPreferences pref;
 
     private EditText fromDateEtxt;
     private EditText toDateEtxt;
-    private DatePickerDialog fromDatePickerDialog;
-    private DatePickerDialog toDatePickerDialog;
-    private SimpleDateFormat dateFormatter;
+    //private DatePickerDialog fromDatePickerDialog;
+    //private DatePickerDialog toDatePickerDialog;
+    //private SimpleDateFormat dateFormatter;
 
     private LineGraphSeries<DataPoint> mSeries1;
     private GraphView graph;
+    int dim_array;
+    String[] dates;
+    Date firstDate;
+    Date endDate;
+    JSONObject jsonServerResp;
 
 
     @Override
@@ -88,11 +103,10 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
         /*
          * Riempimento delle textView relative alle info del paziente
          */
-        Intent i = getActivity().getIntent();
-        final String nome = i.getStringExtra("nome");
-        final String city = i.getStringExtra("città");
-        final String birthdate = i.getStringExtra("data_di_nascita");
-        id_pat = i.getStringExtra("id");
+        id_pat = PatientInfo.getPatient_id();
+        final String nome = PatientInfo.getPatient_name();
+        final String city = PatientInfo.getPatient_city();
+        final String birthdate = PatientInfo.getPatient_birthdate();
 
         tvNome = (TextView)rootview.findViewById(R.id.tv_nomePaziente);
         tvCity = (TextView)rootview.findViewById(R.id.tv_cittàPaziente);
@@ -104,14 +118,28 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
         /*
          * Spinner Configuration
          */
-        params = setData();
+        params = setParamType();
         paramSelectorSpinner  = (Spinner)rootview.findViewById(R.id.spinner_params_graph);
-        ArrayAdapter<SpinnerParams> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_dropdown_item,params);
-        paramSelectorSpinner.setAdapter(adapter);
+        ArrayAdapter<SpinnerParams> adapter1 = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_dropdown_item,params);
+        paramSelectorSpinner.setAdapter(adapter1);
         paramSelectorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                p = (SpinnerParams)parent.getSelectedItem();
+                paramSpinner = (SpinnerParams)parent.getSelectedItem();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        intervals = setDateInterval();
+        dateIntervalSelectorSpinner = (Spinner)rootview.findViewById(R.id.spinner_date_interval);
+        ArrayAdapter<SpinnerParams> adapter2 = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_dropdown_item,intervals);
+        dateIntervalSelectorSpinner.setAdapter(adapter2);
+        dateIntervalSelectorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                intervalSpinner = (SpinnerParams)parent.getSelectedItem();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -120,7 +148,7 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
 
         /*
          * DatePickerInitialization
-         */
+
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
         fromDateEtxt = (EditText) rootview.findViewById(R.id.etxt_fromdate);
@@ -132,8 +160,8 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
 
         fromDateEtxt.setOnClickListener(this);
         toDateEtxt.setOnClickListener(this);
+    */
 
-        setDateTimeField();
 
         /*
          * Graph initialization
@@ -147,9 +175,18 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
 
         return rootview;
     }
+    private ArrayList<SpinnerParams> setDateInterval(){
+        ArrayList<SpinnerParams> params = new ArrayList<>();
+        String[] ids = getResources().getStringArray(R.array.mean_selector_ids);
+        String[] names = getResources().getStringArray(R.array.mean_selector_names);
+        for (int i=0;i<ids.length;i++){
+            params.add(new SpinnerParams(ids[i],names[i]));
+        }
+        return params;
+    }
 
     //riempimento spinner
-    private ArrayList<SpinnerParams> setData(){
+    private ArrayList<SpinnerParams> setParamType(){
         ArrayList<SpinnerParams> params = new ArrayList<>();
         String[] ids = getResources().getStringArray(R.array.params_ids);
         String[] names = getResources().getStringArray(R.array.params_names);
@@ -160,7 +197,7 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
     }
 
     //per la selezione della data
-
+    /*
     private void setDateTimeField() {
         fromDateEtxt.setOnClickListener(this);
         toDateEtxt.setOnClickListener(this);
@@ -188,35 +225,80 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
-
+    */
     //Volley request
 
-    private void sendParams(final String id_pat, final String start_date, final String end_date, final String param_id) {
+    private void sendParams(final String id_pat, final String interval_id, final String param_id) {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd'T'HH:mm:ss");
+        final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
         LineGraphSeries<DataPoint> series;
+        graph.clearSecondScale();
+
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String url = pref.getString("service_provider", "");
         final String final_addr = url+"/testgrafici";
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, final_addr,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            Toast.makeText(getActivity(), "params putted", Toast.LENGTH_SHORT).show();
-                            JSONObject jsonServerResp = new JSONObject(response);
-                            JSONArray jsonArray = jsonServerResp.getJSONArray("results");
 
-                            for (int i=0;i<jsonArray.length();i++){
+                        //cancella i grafici precedenti
+                        graph.removeAllSeries();
+                        //ArrayList<Date> dates= new ArrayList<Date>();
+
+
+
+                        //Toast.makeText(getActivity(),response, Toast.LENGTH_SHORT).show();
+                        JSONObject jsonServerResp = null;
+                        try {
+                            jsonServerResp = new JSONObject(response);
+                            JSONArray jsonArray = jsonServerResp.getJSONArray("results");
+                            dim_array = jsonArray.length();
+                            dates = new String[dim_array];
+                            final DataPoint[] points =new DataPoint[dim_array];
+                            for(int i=0;i<jsonArray.length();i++) {
+                                JSONObject json_item = jsonArray.getJSONObject(i);
+                                String date_meas = json_item.getString("measurementDate");
+                                //Date dataMisura = format.parse(date_meas);
+                                Integer value = json_item.getInt("value");
+                                points[i] = new DataPoint(i, value);
+                                dates[i] = date_meas;
 
                             }
+                            mSeries1 = new LineGraphSeries<>(points);
+                            //firstDate = dates.get(0);
+                            //endDate = dates.get(dim_array);
 
-                        }
-                        catch (JSONException e) {
+
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                        }
+                        }/* catch (ParseException b) {
+                            b.printStackTrace();
+                        }*/
+
+                        graph.addSeries(mSeries1);
+                        graph.getGridLabelRenderer().setNumHorizontalLabels(dim_array);
+                        // use static labels for horizontal and vertical labels
+                        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+                        staticLabelsFormatter.setHorizontalLabels(dates);
+                        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+                        //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+                        //graph.getViewport().setMinX(firstDate.getTime());
+                        //graph.getViewport().setMaxX(endDate.getTime());
+                        //graph.getViewport().setXAxisBoundsManual(true);
+                        graph.getGridLabelRenderer().setNumHorizontalLabels(dim_array);
+                        graph.getViewport().setScrollable(true); // enables horizontal scrolling
+                        graph.getViewport().setScrollableY(true); // enables vertical scrolling
+                        graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
+                        graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
+
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -236,31 +318,26 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                             if (err_stringa_A > 0 && err_stringa_B > err_stringa_A && err_stringa_B <= err_stringa.length()) {
                                 err_msg = err_stringa.substring(err_stringa_A, err_stringa_B);
                             }
-                            if (err_msg.equals("wrong_params")) {
-                                Boolean cb = pref.getBoolean("show_dialogs", false);
-                                if (cb.equals(true)){
-                                    AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(getActivity());
-                                    wrongParamsAlert.setTitle("Attenzione!")
-                                            .setMessage("Not succesfull Request")
-                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    dialogInterface.dismiss();
-                                                }
-                                            })
-                                            .create();
-                                    wrongParamsAlert.show();
-                                }
-                                else{
-                                    Toast.makeText(getActivity(), getString(R.string.toast_user_password_wrong), Toast.LENGTH_LONG).show();
-                                }
+                            if (err_msg.equals("empty")) {
+
+                                AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(getActivity());
+                                wrongParamsAlert.setTitle("Attenzione!")
+                                        .setMessage("Non ci sono valori da mostrare nell'intervallo selezionato ")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        })
+                                        .create();
+                                wrongParamsAlert.show();
+
                             }
-                            if (err_msg.equals("no_server")) {
-                                Boolean cb = pref.getBoolean("show_dialogs", false);
-                                if (cb.equals(true)) {
+                            if (err_msg.equals("error")) {
+
                                     AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
                                     noServerAlert.setTitle("Attenzione!")
-                                            .setMessage("server is down")
+                                            .setMessage("Problema di Connessione al Server, attendere!")
                                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -270,42 +347,35 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                                             .create();
                                     noServerAlert.show();
                                 }
-                                else{
-                                    Toast.makeText(getActivity(), getString(R.string.toast_server_wrong), Toast.LENGTH_LONG).show();
-                                }
+
                             }
+                        else
+                        {
+
+                            AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
+                            noServerAlert.setTitle("Attenzione!")
+                                    .setMessage("Problema di Connessione al Server, attendere!")
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    })
+                                    .create();
+                            noServerAlert.show();
+
+
+                            }
+
+                            error.printStackTrace();
 
                         }
-                        else{
-                            Boolean cb = pref.getBoolean("show_dialogs", false);
-                            if (cb.equals(true)) {
-                                AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                                noServerAlert.setTitle("Attenzione!")
-                                        .setMessage(getString(R.string.toast_server_wrong))
-                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                dialogInterface.dismiss();
-                                            }
-                                        })
-                                        .create();
-                                noServerAlert.show();
-                            }
-                            else{
-                                Toast.makeText(getActivity(), getString(R.string.toast_server_wrong), Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                        error.printStackTrace();
-
-                    }
                 }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_pat", id_pat);
-                params.put("start_date", start_date);
-                params.put("end_date",end_date);
+                params.put("interval_duration", interval_id);
                 params.put("param_id", param_id);
                 return params;
             }
@@ -317,17 +387,19 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
+        /*
         if(view == fromDateEtxt) {
             fromDatePickerDialog.show();
         } else if(view == toDateEtxt) {
             toDatePickerDialog.show();
         }
-        else if(view == searchButton) {
+        */
+        if(view == searchButton) {
 
-            final String param_id = p.getId();
-            Toast.makeText(getContext(),(id_pat+"--"+fromDateStr+"--"+toDateStr+"--"+param_id),Toast.LENGTH_LONG).show();
+            final String param_id = paramSpinner.getId();
+            final String interval_id = intervalSpinner.getId();
 
-            sendParams(id_pat,fromDateStr,toDateStr,param_id);
+            sendParams(id_pat,interval_id,param_id);
         }
     }
 }

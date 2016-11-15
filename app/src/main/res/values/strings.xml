@@ -81,10 +81,10 @@
     <string name="title_third_tab">Aggiungi promemoria</string>
 
     <!-- Search Patient activity-->
-    <string name="title_patient_disease">Seleziona le patologie di interesse:</string>
+    <string name="title_patient_disease">Seleziona le tipologie di paziente:\n(Possono essere selezionate più opzioni. Un paziente che fa la dialisi peritoneale e che ha fatto le analisi del sangue può essere trovato selezionando o l\'una o l\'altra opzione)</string>
     <string name="title_patient_name">Nome paziente</string>
     <string name="subtitle_patient_name">(*  Devono essere rispettate le lettere maiuscole iniziali nel nome e nel cognome)</string>
-    <string name="advice_checkbox_deseases">Selezionando una patologia senza inserire il nome vengono selezionati tutti i pazienti con quella patologia</string>
+    <string name="advice_checkbox_deseases">Selezionando un\'opzione senza inserire il nome vengono selezionati tutti i pazienti per cui è prevista.</string>
     <string name="hint_patient_name">Inserisci nome paziente</string>
     <string name="button_search">Cerca</string>
 
@@ -101,39 +101,39 @@
     <string name="esami_sangue">Esami del Sangue</string>
 
 
-    <!--Parametri Valori Medi-->
+    <!--Utils Parameters-->
     <string-array name="mean_selector_names">
-        <item>Ultimo Giorno</item>
-        <item>Ultimi Tre Giorni</item>
         <item>Ultima Settimana</item>
-        <item>Ultime Tre Settimane</item>
-        <item>Ultimo mese</item>
+        <item>Ultime Due Settimane</item>
+        <item>Ultimo Mese</item>
+        <item>Ultimi Due Mesi</item>
     </string-array>
     <string-array name="mean_selector_ids">
-        <item>one_day</item>
-        <item>three_days</item>
         <item>one_week</item>
-        <item>three_weeks</item>
+        <item>two_weeks</item>
         <item>one_month</item>
+        <item>two_months</item>
     </string-array>
-
-    <!-- Parametri Grafici-->
     <string-array name="params_ids">
-        <item>press</item>
+        <item>systolic</item>
+        <item>diastolic</item>
         <item>glic</item>
-        <item>spo2</item>
-        <item>mass</item>
+        <item>blood_oxygen_value</item>
+        <item>heart_rate</item>
+        <item>weight</item>
     </string-array>
 
     <string-array name="params_names">
-        <item>Pressione</item>
+        <item>Pressione sistolica</item>
+        <item>Pressione diastolica</item>
         <item>Glicemia</item>
         <item>SpO2</item>
+        <item>Frequenza Cardiaca</item>
         <item>Massa</item>
     </string-array>
 
-    <string name="graph_interface_description"> Per selezionare le date del range temporale basta cliccare sui due campi di inserimento. Verrà aperta una finestra dalla quale si può selezionare la data</string>
-
+    <string name="valori_puntuali_interface_description"> Per selezionare le date del range temporale basta cliccare sui due campi di inserimento. Verrà aperta una finestra dalla quale si può selezionare la data</string>
+    <string name="graph_interface_description">Cliccare sul bottone per inizializzare il grafico</string>
     <!-- Esami sangue-->
     <string name="pes1string">Fragment1</string>
     <string name="pes2string">Fragment2</string>

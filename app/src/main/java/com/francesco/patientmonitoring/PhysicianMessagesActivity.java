@@ -23,7 +23,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.francesco.patientmonitoring.sharedPreferences.SettingsActivity;
+import com.francesco.patientmonitoring.utilities.PatientInfo;
+import com.francesco.patientmonitoring.utilities.PhysicianInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,21 +58,20 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_physician_messages);
 
-        //physician_id = PreferenceManager.getDefaultSharedPreferences(this).getString("physician_id", "defaultStringIfNothingFound");
+        pat_id = PatientInfo.getPatient_id();
+        final String nome = PatientInfo.getPatient_name();
+        final String city = PatientInfo.getPatient_city();
+        final String birthdate = PatientInfo.getPatient_birthdate();
+        ArrayList<String> disease = PatientInfo.getList();
+
+        physician_id = PhysicianInfo.getPhysician_id();
+
+        setTitle("Invia messaggio a "+nome);
+
+
 
         /*
-        From the intent
-         */
-
-        Intent i = getIntent();
-        pat_id = i.getStringExtra("id");
-        physician_id = i.getStringExtra("physician_id");
-        final String nome = i.getStringExtra("nome");
-        final String city = i.getStringExtra("città");
-        final String birthdate = i.getStringExtra("data_di_nascita");
-
-        /*
-        set textviews with intent values
+        set textviews with patient values
          */
         tvNome = (TextView)findViewById(R.id.tv_nomePaziente);
         tvCity = (TextView)findViewById(R.id.tv_cittàPaziente);

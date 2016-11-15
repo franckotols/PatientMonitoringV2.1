@@ -29,6 +29,8 @@ import com.android.volley.toolbox.Volley;
 import com.francesco.patientmonitoring.R;
 import com.francesco.patientmonitoring.adapters.PazienteAdapter;
 import com.francesco.patientmonitoring.pojo.Pazienti;
+import com.francesco.patientmonitoring.utilities.PatientInfo;
+import com.francesco.patientmonitoring.utilities.PhysicianInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -174,17 +176,30 @@ public class RicercaPazienteFragment extends Fragment implements View.OnClickLis
                             jsonServerResp = new JSONObject(response);
                             JSONArray jsonArray = jsonServerResp.getJSONArray("server_response");
                             String name, city, birthdate, pat_id;
+
+
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                                 JSONObject properties = jsonObj.getJSONObject("properties");
+
+
                                 //username = jsonObj.getString("userName");
                                 name = jsonObj.getString("name");
+
                                 //properties
                                 city = properties.getString("city");
                                 birthdate = properties.getString("birthdate");
                                 pat_id = jsonObj.getString("id");
 
-                                Pazienti paziente = new Pazienti(name,city,birthdate,pat_id);
+                                //Patient Disease
+                                JSONObject j_disease = new JSONObject(properties.getString("diseases"));
+                                JSONArray j_ar_disease = j_disease.getJSONArray("diseases_list");
+                                //String[] disease_array = new String[];
+                                ArrayList<String> disease_array= new ArrayList<String>();
+                                for(int j=0;j<j_ar_disease.length();j++){
+                                    disease_array.add(j_ar_disease.getString(j));
+                                }
+                                Pazienti paziente = new Pazienti(name,city,birthdate,pat_id,disease_array);
                                 pazienteAdapter.add(paziente);
                             }
                         } catch (JSONException e) {

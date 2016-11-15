@@ -13,6 +13,7 @@
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
@@ -24,39 +25,56 @@
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/title_activity_register"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".activities.VisualizzaRiepilogo"
             android:label="@string/title_activity_visualizza_riepilogo"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".HomeActivity">
+        <activity
+            android:name=".HomeActivity"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".sharedPreferences.SettingsActivity"
-            android:label="@string/title_activity_settings">
-        </activity>
-        <activity
-            android:name=".ParametriActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_settings"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".BaseActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".UrinAnalysisActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".PhysicianMessagesActivity"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
-        <activity android:name=".DiaryDpActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".DiaryDpActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ParametersActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".HomePazienteActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

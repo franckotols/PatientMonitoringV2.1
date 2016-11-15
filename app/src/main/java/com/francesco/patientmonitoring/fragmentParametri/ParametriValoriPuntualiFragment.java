@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.francesco.patientmonitoring.R;
+import com.francesco.patientmonitoring.utilities.PatientInfo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,11 +47,10 @@ public class ParametriValoriPuntualiFragment extends Fragment {
         }
 
         View rootview = inflater.inflate(R.layout.parametri_valori_puntuali, container, false);
-        Intent i = getActivity().getIntent();
-        final String nome = i.getStringExtra("nome");
-        final String city = i.getStringExtra("città");
-        final String birthdate = i.getStringExtra("data_di_nascita");
-        final String id_pat = i.getStringExtra("id");
+        final String id_pat = PatientInfo.getPatient_id();
+        final String nome = PatientInfo.getPatient_name();
+        final String city = PatientInfo.getPatient_city();
+        final String birthdate = PatientInfo.getPatient_birthdate();
         //tvNome = (TextView)rootview.findViewById(R.id.tv_nomePaziente);
         //tvCity = (TextView)rootview.findViewById(R.id.tv_cittàPaziente);
         //tvBirthdate = (TextView)rootview.findViewById(R.id.tv_birthPaziente);

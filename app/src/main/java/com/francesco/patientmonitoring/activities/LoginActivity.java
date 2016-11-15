@@ -28,6 +28,8 @@ import com.android.volley.toolbox.Volley;
 import com.francesco.patientmonitoring.HomeActivity;
 import com.francesco.patientmonitoring.R;
 import com.francesco.patientmonitoring.sharedPreferences.SettingsActivity;
+import com.francesco.patientmonitoring.utilities.PatientInfo;
+import com.francesco.patientmonitoring.utilities.PhysicianInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -146,9 +148,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             JSONObject jsonServerResp = new JSONObject(response);
                             JSONObject jsonR = jsonServerResp.getJSONObject("results");
                             String physician_id = jsonR.getString("physician_id");
+                            PhysicianInfo.setPhysician_id(physician_id);
                             Toast.makeText(LoginActivity.this, getString(R.string.toast_login_succesful), Toast.LENGTH_SHORT).show();
                             Intent ii = new Intent(LoginActivity.this, HomeActivity.class);
-                            ii.putExtra("physician_id", physician_id);
                             startActivity(ii);
                         }
 

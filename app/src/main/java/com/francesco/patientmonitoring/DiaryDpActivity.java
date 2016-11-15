@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.francesco.patientmonitoring.utilities.PatientInfo;
+
 public class DiaryDpActivity extends BaseActivity {
 
     String pat_id;
@@ -20,11 +22,10 @@ public class DiaryDpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_dp);
 
-        Intent i = getIntent();
-        pat_id = i.getStringExtra("id");
-        final String nome = i.getStringExtra("nome");
-        final String city = i.getStringExtra("città");
-        final String birthdate = i.getStringExtra("data_di_nascita");
+        pat_id = PatientInfo.getPatient_id();
+        final String nome = PatientInfo.getPatient_name();
+        final String city = PatientInfo.getPatient_city();
+        final String birthdate = PatientInfo.getPatient_birthdate();
 
         setTitle(nome+" - Diario Clinico");
         tvNome = (TextView)findViewById(R.id.tv_nomePaziente);

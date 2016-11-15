@@ -26,6 +26,7 @@ import com.francesco.patientmonitoring.adapters.PazienteAdapter;
 import com.francesco.patientmonitoring.adapters.UrinMeasureAdapter;
 import com.francesco.patientmonitoring.pojo.Pazienti;
 import com.francesco.patientmonitoring.pojo.UrinMeasure;
+import com.francesco.patientmonitoring.utilities.PatientInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,11 +80,10 @@ public class UrinAnalysisActivity extends BaseActivity {
         mUrinMeasureAdapter = new UrinMeasureAdapter(this,R.layout.list_layout_urin_measure);
         listView.setAdapter(mUrinMeasureAdapter);
 
-        Intent i = getIntent();
-        pat_id = i.getStringExtra("id");
-        final String nome = i.getStringExtra("nome");
-        final String city = i.getStringExtra("città");
-        final String birthdate = i.getStringExtra("data_di_nascita");
+        pat_id = PatientInfo.getPatient_id();
+        final String nome = PatientInfo.getPatient_name();
+        final String city = PatientInfo.getPatient_city();
+        final String birthdate = PatientInfo.getPatient_birthdate();
 
         setTitle(nome+" - Analisi Urine");
 
@@ -145,6 +145,11 @@ public class UrinAnalysisActivity extends BaseActivity {
 
     private void postPatientID() {
 
+        final ProgressDialog pd = new ProgressDialog(UrinAnalysisActivity.this);
+
+        pd.setMessage(getString(R.string.process_dialog_waiting));
+        pd.show();
+
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         String url = pref.getString("service_provider", "");
         final String final_addr = url+"/api/urinanalysis";
@@ -153,6 +158,8 @@ public class UrinAnalysisActivity extends BaseActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+                        pd.dismiss();
 
                         //Toast.makeText(UrinAnalysisActivity.this,response,Toast.LENGTH_LONG).show();
 
@@ -198,6 +205,7 @@ public class UrinAnalysisActivity extends BaseActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
+                        pd.dismiss();
 
                         NetworkResponse err_ = error.networkResponse;
                         //String display_err_user_msg="\n\n\nError in sending request.";

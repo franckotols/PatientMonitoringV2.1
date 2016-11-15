@@ -9,9 +9,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
+
+import com.francesco.patientmonitoring.utilities.PatientInfo;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -49,6 +54,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         FrameLayout activityContainer = (FrameLayout) fullLayout.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
 
+
         /**
          * Note that we don't pass the child's layoutId to the parent,
          * instead we pass it our inflated layout.
@@ -57,6 +63,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar = (Toolbar) findViewById(R.id.base_toolbar);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
+
+
+
+        boolean[] patientDiseases = PatientInfo.getDiseases();
+        boolean isOnPeritoneal = patientDiseases[PatientInfo.Disease.peritoneale.ordinal()];
+        boolean isOnEmodialisis = patientDiseases[PatientInfo.Disease.emodialisi.ordinal()];
+        boolean isOnBloodAnalysis = patientDiseases[PatientInfo.Disease.sangue.ordinal()];
+        boolean isOnUrinAnalysis = patientDiseases[PatientInfo.Disease.urine.ordinal()];
+        navigationView.getMenu().getItem(2).setVisible(isOnPeritoneal);
+        navigationView.getMenu().getItem(3).setVisible(isOnEmodialisis);
+        //navigationView.getMenu().getItem(4).setVisible(isOnBloodAnalysis);
+        navigationView.getMenu().getItem(5).setVisible(isOnUrinAnalysis);
 
 
         if (useToolbar())
@@ -111,7 +129,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         fullLayout.closeDrawer(GravityCompat.START);
@@ -131,54 +148,46 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id)
         {
-            case R.id.nav_send_message:
-                Intent i= new Intent(this, PhysicianMessagesActivity.class);
-                i.putExtra("nome",nome);
-                i.putExtra("città",city);
-                i.putExtra("data_di_nascita",birthdate);
-                i.putExtra("id",pat_id);
-                i.putExtra("physician_id",physician_id);
+            case R.id.nav_home_paziente:
+                Intent inte = new Intent(this, HomePazienteActivity.class);
+                startActivity(inte);
                 return true;
-            /*
-            L'INTERFACCIA DEI PARAMETRI ANCORA NON FUNZIONA
-
             case R.id.nav_parameters:
-                Intent intent= new Intent(this, ParametriActivity.class);
-                intent.putExtra("nome",nome);
-                intent.putExtra("città",city);
-                intent.putExtra("data_di_nascita",birthdate);
-                intent.putExtra("id",pat_id);
-                intent.putExtra("physician_id",physician_id);
+                Intent intent= new Intent(this, ParametersActivity.class);
                 startActivity(intent);
                 return true;
-                */
-
 
             case R.id.nav_diary_dp :
-                Intent ii = new Intent(this, DiaryDpActivity.class);
-                ii.putExtra("nome",nome);
-                ii.putExtra("città",city);
-                ii.putExtra("data_di_nascita",birthdate);
-                ii.putExtra("id",pat_id);
-                ii.putExtra("physician_id",physician_id);
-                startActivity(ii);
+                Intent i = new Intent(this, DiaryDpActivity.class);
+                startActivity(i);
                 return true;
 
-            /*
-            case R.id.nav_blood:
-                startActivity(new Intent(this, BloodActivity.class));
+            case R.id.nav_diary_emo :
+                //Intent ii = new Intent(this, .class);
+                //startActivity(ii);
                 return true;
-                */
+
+            case R.id.nav_blood:
+                //Intent iii= new Intent(this, .class);
+                //startActivity(iii);
+                return true;
 
             case R.id.nav_urin_analysis:
-                Intent iii = new Intent(this, UrinAnalysisActivity.class);
-                iii.putExtra("nome",nome);
-                iii.putExtra("città",city);
-                iii.putExtra("data_di_nascita",birthdate);
-                iii.putExtra("id",pat_id);
-                iii.putExtra("physician_id",physician_id);
-                startActivity(iii);
+                Intent iiii = new Intent(this, UrinAnalysisActivity.class);
+                startActivity(iiii);
                 return true;
+
+            case R.id.nav_threshold:
+                //Intent iiiii = new Intent(this, PhysicianMessagesActivity.class);
+                //startActivity(iiiii);
+                return true;
+
+            case R.id.nav_send_message:
+                Intent iiiiii = new Intent(this, PhysicianMessagesActivity.class);
+                startActivity(iiiiii);
+                return true;
+
+
 
 
 

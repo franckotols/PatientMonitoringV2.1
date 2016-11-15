@@ -1,17 +1,30 @@
 package com.francesco.patientmonitoring.pojo;
 
+import java.util.ArrayList;
+
 /**
  * Created by Fra on 20/09/2016.
  */
 public class Pazienti {
 
     private String full_name, città, birthdate, pat_id;
+    private ArrayList<String> list_disease;
 
-    public Pazienti(String full_name, String città, String birthdate, String pat_id) {
+    public ArrayList<String> getList_disease() {
+        return list_disease;
+    }
+
+    public void setList_disease(ArrayList<String> list_disease) {
+        this.list_disease = list_disease;
+
+    }
+
+    public Pazienti(String full_name, String città, String birthdate, String pat_id, ArrayList<String> list_disease) {
         this.full_name = full_name;
         this.città = città;
         this.birthdate = birthdate;
         this.pat_id = pat_id;
+        this.list_disease = list_disease;
     }
 
     public String getFull_name() {

@@ -29,6 +29,9 @@ import com.francesco.patientmonitoring.R;
 import com.francesco.patientmonitoring.pojo.SpinnerParams;
 import com.francesco.patientmonitoring.utilities.PatientInfo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +49,10 @@ public class ParametriValoriMediFragment extends Fragment {
     SpinnerParams p;
     ArrayList<SpinnerParams> params;
     SharedPreferences pref;
+
+    //TextViews Parametri
+    TextView firstBMI;
+    TextView secondBMI;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
@@ -69,6 +76,10 @@ public class ParametriValoriMediFragment extends Fragment {
         tvNome.setText(nome);
         tvCity.setText(city);
         tvBirthdate.setText(birthdate);
+
+        //textviews parametri
+        firstBMI = (TextView)rootview.findViewById(R.id.bmi_mean_ult);
+        secondBMI = (TextView)rootview.findViewById(R.id.bmi_mean_pen);
 
         searchMeanValuesButton = (Button)rootview.findViewById(R.id.search_mean_values);
         searchMeanValuesButton.setOnClickListener(new View.OnClickListener(){
@@ -128,12 +139,33 @@ public class ParametriValoriMediFragment extends Fragment {
 
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String url = pref.getString("service_provider", "");
-        final String final_addr = url+"/api/parameters/meanvalues";
+        //URL DEL SERVER DI PROVA
+        final String final_addr = url+"/test_parametri/valori_medi";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, final_addr,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
+
+                        try{
+                            JSONObject jsonServerResp = new JSONObject(response);
+                            JSONObject jBMI = jsonServerResp.getJSONObject("BMI");
+                            String BMI_first = jBMI.getString("1st_month");
+                            //Toast.makeText(getContext(),BMI_first,Toast.LENGTH_SHORT).show();
+                            String BMI_second = jBMI.getString(("2nd_month"));
+                            //Toast.makeText(getContext(),BMI_second,Toast.LENGTH_SHORT).show();
+                            firstBMI.setText(BMI_first);
+                            secondBMI.setText(BMI_second);
+
+
+
+
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -152,6 +184,21 @@ public class ParametriValoriMediFragment extends Fragment {
                             int err_stringa_B = err_stringa.indexOf("</p>");
                             if (err_stringa_A > 0 && err_stringa_B > err_stringa_A && err_stringa_B <= err_stringa.length()) {
                                 err_msg = err_stringa.substring(err_stringa_A, err_stringa_B);
+                            }
+
+                            if (err_msg.equals("no_device")) {
+
+                                AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
+                                noServerAlert.setTitle("Attenzione!")
+                                        .setMessage("I dispositivi di monitoraggio dei parametri non sono ancora associati al paziente!")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        })
+                                        .create();
+                                noServerAlert.show();
                             }
                             if (err_msg.equals("error")) {
                                 Toast.makeText(getActivity(), "bad request", Toast.LENGTH_LONG).show();
@@ -177,7 +224,10 @@ public class ParametriValoriMediFragment extends Fragment {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
+
     }
+
+
 
 
 }

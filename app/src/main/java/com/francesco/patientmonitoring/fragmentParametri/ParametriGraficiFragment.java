@@ -1,6 +1,7 @@
 package com.francesco.patientmonitoring.fragmentParametri;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -83,9 +84,8 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
     private LineGraphSeries<DataPoint> mSeries1;
     private GraphView graph;
     int dim_array;
-    String[] dates;
-    Date firstDate;
-    Date endDate;
+
+
     JSONObject jsonServerResp;
 
 
@@ -173,6 +173,7 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
 
 
 
+
         return rootview;
     }
     private ArrayList<SpinnerParams> setDateInterval(){
@@ -230,17 +231,27 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
 
     private void sendParams(final String id_pat, final String interval_id, final String param_id) {
 
-        final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //per il test dei grafici
+        final DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 
         LineGraphSeries<DataPoint> series;
-        graph.clearSecondScale();
+        mSeries1 = new LineGraphSeries<>();
+
+        /*if (graph!=null){
+            graph.removeAllSeries();
+        }*/
 
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String url = pref.getString("service_provider", "");
-        final String final_addr = url+"/testgrafici";
+        //ATTENZIONE
+        //E' l'URL del server di prova
+        final String final_addr = url+"/test_parametri/grafico";
+        final ProgressDialog pd = new ProgressDialog(getContext());
+        pd.setMessage(getString(R.string.process_dialog_waiting));
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, final_addr,
                 new Response.Listener<String>() {
@@ -248,54 +259,62 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                     public void onResponse(String response) {
 
                         //cancella i grafici precedenti
+
+
+
+                        //cancella i grafici precedenti
                         graph.removeAllSeries();
-                        //ArrayList<Date> dates= new ArrayList<Date>();
+                        pd.dismiss();
 
 
 
-                        //Toast.makeText(getActivity(),response, Toast.LENGTH_SHORT).show();
-                        JSONObject jsonServerResp = null;
+                        Toast.makeText(getActivity(),response, Toast.LENGTH_SHORT).show();
+
                         try {
                             jsonServerResp = new JSONObject(response);
                             JSONArray jsonArray = jsonServerResp.getJSONArray("results");
                             dim_array = jsonArray.length();
-                            dates = new String[dim_array];
+
                             final DataPoint[] points =new DataPoint[dim_array];
                             for(int i=0;i<jsonArray.length();i++) {
                                 JSONObject json_item = jsonArray.getJSONObject(i);
                                 String date_meas = json_item.getString("measurementDate");
-                                //Date dataMisura = format.parse(date_meas);
+                                Date dataMisura = format.parse(date_meas);
                                 Integer value = json_item.getInt("value");
-                                points[i] = new DataPoint(i, value);
-                                dates[i] = date_meas;
+                                points[i] = new DataPoint(dataMisura, value);
+
 
                             }
+
                             mSeries1 = new LineGraphSeries<>(points);
-                            //firstDate = dates.get(0);
-                            //endDate = dates.get(dim_array);
+                            //Date firstDate = dates.get(0);
+                            //Date endDate = dates.get(dim_array);
+                            graph.addSeries(mSeries1);
+                            graph.getGridLabelRenderer().setNumHorizontalLabels(dim_array);
+                            // use static labels for horizontal and vertical labels
+                            //StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+                            //staticLabelsFormatter.setHorizontalLabels(dates);
+                            //graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+                            graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+                            //graph.getViewport().setMinX(firstDate.getTime());
+                            //graph.getViewport().setMaxX(endDate.getTime());
+                            //graph.getViewport().setXAxisBoundsManual(true);
+
+                            //COMMENTANDO QUESTE RIGHE IL  GRAFICO SPARISCE
+                            graph.getGridLabelRenderer().setNumHorizontalLabels(dim_array);
+                            graph.getViewport().setScrollable(true); // enables horizontal scrolling
+                            graph.getViewport().setScrollableY(true); // enables vertical scrolling
+                            graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
+                            graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                        }/* catch (ParseException b) {
+                        } catch (ParseException b) {
                             b.printStackTrace();
-                        }*/
+                        }
 
-                        graph.addSeries(mSeries1);
-                        graph.getGridLabelRenderer().setNumHorizontalLabels(dim_array);
-                        // use static labels for horizontal and vertical labels
-                        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-                        staticLabelsFormatter.setHorizontalLabels(dates);
-                        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
-                        //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                        //graph.getViewport().setMinX(firstDate.getTime());
-                        //graph.getViewport().setMaxX(endDate.getTime());
-                        //graph.getViewport().setXAxisBoundsManual(true);
-                        graph.getGridLabelRenderer().setNumHorizontalLabels(dim_array);
-                        graph.getViewport().setScrollable(true); // enables horizontal scrolling
-                        graph.getViewport().setScrollableY(true); // enables vertical scrolling
-                        graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
-                        graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
+
 
 
 
@@ -304,6 +323,7 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        pd.dismiss();
 
                         NetworkResponse err_ = error.networkResponse;
                         //String display_err_user_msg="\n\n\nError in sending request.";
@@ -347,6 +367,21 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                                             .create();
                                     noServerAlert.show();
                                 }
+
+                            if (err_msg.equals("no_device")) {
+
+                                AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
+                                noServerAlert.setTitle("Attenzione!")
+                                        .setMessage("I dispositivi di monitoraggio dei parametri non sono ancora associati al paziente!")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        })
+                                        .create();
+                                noServerAlert.show();
+                            }
 
                             }
                         else

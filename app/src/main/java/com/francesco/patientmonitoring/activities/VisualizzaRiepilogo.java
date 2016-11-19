@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.francesco.patientmonitoring.HomeActivity;
 import com.francesco.patientmonitoring.R;
 
 import org.json.JSONException;
@@ -155,9 +156,20 @@ public class VisualizzaRiepilogo extends AppCompatActivity {
                                 public void onResponse(String response) {
 
                                     pd.dismiss();
-                                    Toast.makeText(VisualizzaRiepilogo.this,"Registrazione Avvenuta",Toast.LENGTH_SHORT).show();
-                                    bRegistra.setEnabled(false);
 
+                                    AlertDialog.Builder succRegAlert = new AlertDialog.Builder(VisualizzaRiepilogo.this);
+                                    succRegAlert.setTitle("")
+                                            .setMessage("Registrazione avvenuta con successo")
+                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Intent i_home = new Intent(VisualizzaRiepilogo.this, LoginActivity.class);
+                                                    startActivity(i_home);
+                                                    dialogInterface.dismiss();
+                                                }
+                                            })
+                                            .create();
+                                    succRegAlert.show();
 
                                 }
                             }, new Response.ErrorListener() {

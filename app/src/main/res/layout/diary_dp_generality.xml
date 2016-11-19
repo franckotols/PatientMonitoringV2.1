@@ -28,11 +28,31 @@
                     android:text="Data:"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
-                    android:id="@+id/date_tv"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="16dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/date_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -176,11 +196,24 @@
                     android:text="Allarmi:"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
-                    android:id="@+id/tv_alarms"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="16dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/tv_alarms"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
             </LinearLayout>
 
 

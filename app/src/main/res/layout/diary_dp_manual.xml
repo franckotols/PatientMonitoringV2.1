@@ -10,15 +10,17 @@
         style="?android:listSeparatorTextViewStyle"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tv_manual_exchanges"/>
 
+    <!-- QUESTA PARTE E' PREVISTA NELLE INTERFACCE DI CHIARA MA NON C'E' NEL JSON
     <Space
         android:layout_width="@dimen/activity_horizontal_margin"
         android:layout_height="@dimen/activity_horizontal_margin"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,5 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/tv_medication_notes"/>
+    -->
 
 </LinearLayout>

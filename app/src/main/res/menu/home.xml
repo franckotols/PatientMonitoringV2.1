@@ -7,11 +7,6 @@
         android:title="@string/action_settings"
         app:showAsAction="never"/>
 
-    <item
-        android:id="@+id/action_home"
-        android:orderInCategory="100"
-        android:title="Torna alla Home"
-        app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_logout"

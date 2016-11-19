@@ -80,13 +80,13 @@ public class PazienteAdapter extends ArrayAdapter {
                     if(list_dis.contains("Dialisi Peritoneale")){
                         PatientInfo.getDiseases()[PatientInfo.Disease.peritoneale.ordinal()] = true;
                     }
-                    else if(list_dis.contains("Emodialisi")){
+                    if(list_dis.contains("Emodialisi")){
                         PatientInfo.getDiseases()[PatientInfo.Disease.emodialisi.ordinal()] = true;
                     }
-                    else if(list_dis.contains("Esami del Sangue")){
+                    if(list_dis.contains("Esami del Sangue")){
                         PatientInfo.getDiseases()[PatientInfo.Disease.sangue.ordinal()] = true;
                     }
-                    else if (list_dis.contains("Test delle Urine")){
+                    if (list_dis.contains("Test delle Urine")){
                         PatientInfo.getDiseases()[PatientInfo.Disease.urine.ordinal()] = true;
                     }
 

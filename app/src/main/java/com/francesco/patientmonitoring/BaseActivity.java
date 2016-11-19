@@ -42,11 +42,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         /**
          * This is going to be our actual root layout.
          */
-        Intent i = getIntent();
-        pat_id = i.getStringExtra("id");
-        nome = i.getStringExtra("nome");
-        city = i.getStringExtra("città");
-        birthdate = i.getStringExtra("data_di_nascita");
+        //Intent i = getIntent();
+        //pat_id = i.getStringExtra("id");
+        //nome = i.getStringExtra("nome");
+        //city = i.getStringExtra("città");
+        //birthdate = i.getStringExtra("data_di_nascita");
         fullLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
         /**
          * {@link FrameLayout} to inflate the child's view. We could also use a {@link android.view.ViewStub}
@@ -73,7 +73,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         boolean isOnUrinAnalysis = patientDiseases[PatientInfo.Disease.urine.ordinal()];
         navigationView.getMenu().getItem(2).setVisible(isOnPeritoneal);
         navigationView.getMenu().getItem(3).setVisible(isOnEmodialisis);
-        //navigationView.getMenu().getItem(4).setVisible(isOnBloodAnalysis);
+        navigationView.getMenu().getItem(4).setVisible(isOnBloodAnalysis);
         navigationView.getMenu().getItem(5).setVisible(isOnUrinAnalysis);
 
 
@@ -168,8 +168,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 return true;
 
             case R.id.nav_blood:
-                //Intent iii= new Intent(this, .class);
-                //startActivity(iii);
+                Intent iii= new Intent(this, BloodAnalysisActivity.class);
+                startActivity(iii);
                 return true;
 
             case R.id.nav_urin_analysis:

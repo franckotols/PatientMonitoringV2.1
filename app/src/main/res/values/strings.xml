@@ -76,11 +76,22 @@
     <string name="informations_missing">I campi obbligatori non sono stati tutti compilati!</string>
 
     <!-- Home activity-->
-    <string name="title_first_tab">Notifiche</string>
+    <string name="title_first_tab">Allarmi Pazienti</string>
     <string name="title_second_tab">Ricerca Paziente</string>
     <string name="title_third_tab">Aggiungi promemoria</string>
 
-    <!-- Search Patient activity-->
+    <!--Alerts Fragment-->
+    <string-array name="alerts_search_ids">
+        <item>get_alerts_read_and_notread</item>
+        <item>get_list_of_not_read_alerts</item>
+    </string-array>
+    <string-array name="alerts_search_text">
+        <item>Visualizza tutti gli allarmi</item>
+        <item>Visualizza solo gli allarmi non letti</item>
+    </string-array>
+
+
+    <!-- Search Patient fragment-->
     <string name="title_patient_disease">Seleziona le tipologie di paziente:\n(Possono essere selezionate più opzioni. Un paziente che fa la dialisi peritoneale e che ha fatto le analisi del sangue può essere trovato selezionando o l\'una o l\'altra opzione)</string>
     <string name="title_patient_name">Nome paziente</string>
     <string name="subtitle_patient_name">(*  Devono essere rispettate le lettere maiuscole iniziali nel nome e nel cognome)</string>

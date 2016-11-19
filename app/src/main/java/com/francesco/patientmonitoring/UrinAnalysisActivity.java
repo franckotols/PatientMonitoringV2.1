@@ -8,6 +8,9 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,10 +25,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.francesco.patientmonitoring.activities.LoginActivity;
 import com.francesco.patientmonitoring.adapters.PazienteAdapter;
 import com.francesco.patientmonitoring.adapters.UrinMeasureAdapter;
 import com.francesco.patientmonitoring.pojo.Pazienti;
 import com.francesco.patientmonitoring.pojo.UrinMeasure;
+import com.francesco.patientmonitoring.sharedPreferences.SettingsActivity;
 import com.francesco.patientmonitoring.utilities.PatientInfo;
 
 import org.json.JSONArray;
@@ -73,8 +78,6 @@ public class UrinAnalysisActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_urin_analysis);
-
-
 
         listView=(ListView)findViewById(R.id.list_urin);
         mUrinMeasureAdapter = new UrinMeasureAdapter(this,R.layout.list_layout_urin_measure);
@@ -143,6 +146,72 @@ public class UrinAnalysisActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater= getMenuInflater();
+        inflater.inflate(R.menu.menu_paziente,menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(UrinAnalysisActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
+        }
+
+        if (id == R.id.action_home){
+            AlertDialog.Builder logoutAlert = new AlertDialog.Builder(UrinAnalysisActivity.this);
+            logoutAlert.setTitle("Attenzione!")
+                    .setMessage("Vuoi tornare alla home?")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent i_home = new Intent(UrinAnalysisActivity.this, HomeActivity.class);
+                            startActivity(i_home);
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .create();
+            logoutAlert.show();
+        }
+
+        if (id == R.id.action_logout){
+            AlertDialog.Builder logoutAlert = new AlertDialog.Builder(UrinAnalysisActivity.this);
+            logoutAlert.setTitle("Attenzione!")
+                    .setMessage("Vuoi effettuare il logout?")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent i_logout = new Intent(UrinAnalysisActivity.this, LoginActivity.class);
+                            startActivity(i_logout);
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .create();
+            logoutAlert.show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void postPatientID() {
 
         final ProgressDialog pd = new ProgressDialog(UrinAnalysisActivity.this);
@@ -195,9 +264,6 @@ public class UrinAnalysisActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                         mUrinMeasureAdapter.notifyDataSetChanged();
-                        //Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
-                        //la riga successiva serve perchè altrimenti ad ogni richiesta accumulerebbe
-                        //le patologie selezionate
 
                     }
                 },
@@ -220,12 +286,12 @@ public class UrinAnalysisActivity extends BaseActivity {
                             if (err_stringa_A > 0 && err_stringa_B > err_stringa_A && err_stringa_B <= err_stringa.length()) {
                                 err_msg = err_stringa.substring(err_stringa_A, err_stringa_B);
                             }
-                            /*
-                            if (err_msg.equals("wrong_params")) {
 
-                                AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(LoginActivity.this);
+                            if (err_msg.equals("no_values")) {
+
+                                AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(UrinAnalysisActivity.this);
                                 wrongParamsAlert.setTitle(getString(R.string.attention_message))
-                                        .setMessage(getString(R.string.toast_user_password_wrong))
+                                        .setMessage("Non ci sono analisi da visualizzare")
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -235,35 +301,34 @@ public class UrinAnalysisActivity extends BaseActivity {
                                         .create();
                                 wrongParamsAlert.show();
 
-
                             }
 
 
                         }
 
-                            else {
+                        else {
 
-                                AlertDialog.Builder noServerAlert = new AlertDialog.Builder(LoginActivity.this);
-                                noServerAlert.setTitle("Attenzione!")
-                                        .setMessage(getString(R.string.toast_server_wrong))
-                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                dialogInterface.dismiss();
-                                            }
-                                        })
-                                        .create();
-                                noServerAlert.show();
-
-                            }
-                            */
-
-
-                            error.printStackTrace();
+                            AlertDialog.Builder noServerAlert = new AlertDialog.Builder(UrinAnalysisActivity.this);
+                            noServerAlert.setTitle("Attenzione!")
+                                    .setMessage("Problemi di connessione al server")
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    })
+                                    .create();
+                            noServerAlert.show();
 
                         }
 
-                    }
+
+
+                        error.printStackTrace();
+
+                        }
+
+
                 }) {
             @Override
             protected Map<String, String> getParams() {

@@ -1,5 +1,6 @@
 package com.francesco.patientmonitoring;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.view.Menu;
@@ -14,10 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.francesco.patientmonitoring.activities.LoginActivity;
 import com.francesco.patientmonitoring.adapters.PagerAdapter;
 import com.francesco.patientmonitoring.homeFragments.PromemoriaFragment;
 import com.francesco.patientmonitoring.homeFragments.NotificheFragment;
 import com.francesco.patientmonitoring.homeFragments.RicercaPazienteFragment;
+import com.francesco.patientmonitoring.sharedPreferences.SettingsActivity;
 
 import java.util.List;
 import java.util.Vector;
@@ -87,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater= getMenuInflater();
-        inflater.inflate(R.menu.menu_login,menu);
+        inflater.inflate(R.menu.home,menu);
         return true;
 
     }
@@ -97,9 +101,32 @@ public class HomeActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(this,"ciao",Toast.LENGTH_LONG).show();
+            Intent settingsIntent = new Intent(HomeActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
+        }
+
+
+        if (id == R.id.action_logout){
+            AlertDialog.Builder logoutAlert = new AlertDialog.Builder(HomeActivity.this);
+            logoutAlert.setTitle("Attenzione!")
+                    .setMessage("Vuoi effettuare il logout?")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent i_logout = new Intent(HomeActivity.this, LoginActivity.class);
+                            startActivity(i_logout);
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .create();
+            logoutAlert.show();
         }
 
         return super.onOptionsItemSelected(item);

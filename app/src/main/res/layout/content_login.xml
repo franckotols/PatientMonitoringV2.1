@@ -49,6 +49,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/log_text_registra"
         android:id="@+id/tvRegisterLink"
+        android:textColor="@color/blue800"
         android:layout_below="@+id/remember_checkBox"
         android:layout_centerHorizontal="true"/>
 

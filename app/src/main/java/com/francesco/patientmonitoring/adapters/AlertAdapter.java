@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.francesco.patientmonitoring.pojo.Alerts;
 import com.francesco.patientmonitoring.R;
+import com.francesco.patientmonitoring.utilities.PhysicianInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,14 +76,14 @@ public class AlertAdapter extends ArrayAdapter {
             alertHolder.cbRead.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (compoundButton.isChecked()) {
-                        //Toast.makeText(getContext(), "checked", Toast.LENGTH_LONG).show();
-                        sendParams(alerts.getId(),"checked");
-                    }
-                    else
-                    {
-                        //Toast.makeText(getContext(), "not checked", Toast.LENGTH_LONG).show();
-                        sendParams(alerts.getId(),"not_checked");
+                    if (compoundButton.isPressed()) {
+                        if (compoundButton.isChecked()) {
+                            //Toast.makeText(getContext(), "checked", Toast.LENGTH_LONG).show();
+                            sendParams(alerts.getId(), "checked");
+                        } else {
+                            //Toast.makeText(getContext(), "not checked", Toast.LENGTH_LONG).show();
+                            sendParams(alerts.getId(), "not_checked");
+                        }
                     }
                 }
             });
@@ -148,15 +149,12 @@ public class AlertAdapter extends ArrayAdapter {
                             if (err_stringa_A > 0 && err_stringa_B > err_stringa_A && err_stringa_B <= err_stringa.length()) {
                                 err_msg = err_stringa.substring(err_stringa_A, err_stringa_B);
                             }
-                            if (err_msg.equals("wrong_params")) {
-                                Toast.makeText(getContext(), "no params", Toast.LENGTH_SHORT).show();
+                            if (err_msg.equals("error")) {
+                                Toast.makeText(getContext(), "Errore, stato non cambiato", Toast.LENGTH_SHORT).show();
                             }
-                            if (err_msg.equals("no_server")) {
-                                Toast.makeText(getContext(), "no server", Toast.LENGTH_SHORT).show();
-                            }
-                                                    }
+                        }
                         else{
-                            Toast.makeText(getContext(), "other", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Problema di connessione al server", Toast.LENGTH_SHORT).show();
                         }
 
                         error.printStackTrace();
@@ -168,6 +166,7 @@ public class AlertAdapter extends ArrayAdapter {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(KEY_ID_ALERT, id);
                 params.put(KEY_STATUS_ALERT, status);
+                params.put("physician_id", PhysicianInfo.getPhysician_id());
                 return params;
             }
         };

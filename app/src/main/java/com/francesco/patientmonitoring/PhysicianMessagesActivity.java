@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.francesco.patientmonitoring.activities.LoginActivity;
 import com.francesco.patientmonitoring.sharedPreferences.SettingsActivity;
 import com.francesco.patientmonitoring.utilities.PatientInfo;
 import com.francesco.patientmonitoring.utilities.PhysicianInfo;
@@ -70,6 +72,7 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
 
 
 
+
         /*
         set textviews with patient values
          */
@@ -90,6 +93,72 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
 
         etMessage = (EditText)findViewById(R.id.message_text);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater= getMenuInflater();
+        inflater.inflate(R.menu.menu_paziente,menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(PhysicianMessagesActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
+        }
+
+        if (id == R.id.action_home){
+            AlertDialog.Builder logoutAlert = new AlertDialog.Builder(PhysicianMessagesActivity.this);
+            logoutAlert.setTitle("Attenzione!")
+                    .setMessage("Vuoi tornare alla home?")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent i_home = new Intent(PhysicianMessagesActivity.this, HomeActivity.class);
+                            startActivity(i_home);
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .create();
+            logoutAlert.show();
+        }
+
+        if (id == R.id.action_logout){
+            AlertDialog.Builder logoutAlert = new AlertDialog.Builder(PhysicianMessagesActivity.this);
+            logoutAlert.setTitle("Attenzione!")
+                    .setMessage("Vuoi effettuare il logout?")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent i_logout = new Intent(PhysicianMessagesActivity.this, LoginActivity.class);
+                            startActivity(i_logout);
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .create();
+            logoutAlert.show();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 

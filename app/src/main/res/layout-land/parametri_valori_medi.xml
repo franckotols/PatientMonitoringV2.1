@@ -205,14 +205,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/so2_mean_pen"
+                    android:id="@+id/spo2_mean_pen"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/so2_mean_ult"
+                    android:id="@+id/spo2_mean_ult"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
@@ -227,7 +227,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Glicemia"
+                    android:text="Glicemia [mg/dL]"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"

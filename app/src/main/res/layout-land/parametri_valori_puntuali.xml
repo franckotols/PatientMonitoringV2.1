@@ -15,7 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_weight="2"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/customborder">
 
             <!--for intent values-->
             <TextView
@@ -46,6 +47,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="In questa sezione è possibile visualizzare tutte le misure effettuate nell'arco del giorno selezionato. Ad ogni misura è associato l'orario in cui è stata effettuata."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Inserire la data di interesse nello spazio sottostante e premere il bottone per avviare la ricerca"/>
 
             <EditText
@@ -69,7 +75,11 @@
         <LinearLayout
             android:layout_height="wrap_content" android:layout_width="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Data:"
+                    style="?android:listSeparatorTextViewStyle"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/date_point_params_tv"
@@ -171,6 +182,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -181,7 +193,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Glicemia [%]:"
+                    android:text="Glicemia [mg/dL]:"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/tv_glic"
@@ -191,6 +203,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     />
             </LinearLayout>
+
 
 
         </LinearLayout>

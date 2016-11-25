@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         final String server_addr = pref.getString("service_provider", "");
-        final String final_addr = server_addr+"/registration/specializzazioni";
+        final String final_addr = server_addr+"/api/registration/specializzazioni";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, final_addr,
                 new Response.Listener<JSONObject>() {
                     @Override

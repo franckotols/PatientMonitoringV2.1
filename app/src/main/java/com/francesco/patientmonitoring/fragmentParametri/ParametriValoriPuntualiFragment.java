@@ -58,6 +58,7 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
     private String mDateStr;
 
     JSONObject jsonServerResp;
+    TextView tvDate;
     TextView tvSystolic;
     TextView tvDiastolic;
     TextView tvHeartRate;
@@ -96,6 +97,7 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
 
         setDateTimeField();
 
+        tvDate = (TextView)rootview.findViewById(R.id.date_point_params_tv) ;
         tvSystolic = (TextView)rootview.findViewById(R.id.tv_press_sist);
         tvDiastolic = (TextView)rootview.findViewById(R.id.tv_press_diast);
         tvHeartRate = (TextView)rootview.findViewById(R.id.tv_heart_rate);
@@ -118,6 +120,8 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                 newDate.set(year, monthOfYear, dayOfMonth);
                 mDateEdTxt.setText(dateFormatter.format(newDate.getTime()));
                 mDateStr = dateFormatter.format(newDate.getTime());
+                LastPointValues.setDate(mDateStr);
+                tvDate.setText(LastPointValues.getDate());
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -178,7 +182,7 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                                 String value_str = String.valueOf(value);
                                 diastolic_measurements = diastolic_measurements+(date+"\t\t\t"+value_str+"\n");
                             }
-                            /**
+
                             JSONArray jsonSysArrayHR = jsonServerResp.getJSONArray("heart_rate");
                             for (int i=0;i<jsonSysArrayHR.length();i++){
                                 JSONObject jsonSysObj = jsonSysArrayHR.getJSONObject(i);
@@ -188,14 +192,14 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                                 hr_measurements = hr_measurements+(date+"\t\t\t"+value_str+"\n");
                             }
                             JSONArray jsonSysArraySpO2 = jsonServerResp.getJSONArray("spo2");
-                            for (int i=0;i<jsonSysArrayHR.length();i++){
+                            for (int i=0;i<jsonSysArraySpO2.length();i++){
                                 JSONObject jsonSysObj = jsonSysArraySpO2.getJSONObject(i);
                                 String date = jsonSysObj.getString("measurementDate");
                                 float value = (float) jsonSysObj.getDouble("value");
                                 String value_str = String.valueOf(value);
                                 spo2_measurements = spo2_measurements+(date+"\t\t\t"+value_str+"\n");
                             }
-                             */
+
 
 
                             LastPointValues.setSyst(systolic_measurements);
@@ -231,52 +235,10 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                             if (err_stringa_A > 0 && err_stringa_B > err_stringa_A && err_stringa_B <= err_stringa.length()) {
                                 err_msg = err_stringa.substring(err_stringa_A, err_stringa_B);
                             }
-                            if (err_msg.equals("wrong_params")) {
-                                Boolean cb = pref.getBoolean("show_dialogs", false);
-                                if (cb.equals(true)){
-                                    AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(getActivity());
-                                    wrongParamsAlert.setTitle("Attenzione!")
-                                            .setMessage("Not succesfull Request")
-                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    dialogInterface.dismiss();
-                                                }
-                                            })
-                                            .create();
-                                    wrongParamsAlert.show();
-                                }
-                                else{
-                                    Toast.makeText(getActivity(), getString(R.string.toast_user_password_wrong), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                            if (err_msg.equals("no_server")) {
-                                Boolean cb = pref.getBoolean("show_dialogs", false);
-                                if (cb.equals(true)) {
-                                    AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                                    noServerAlert.setTitle("Attenzione!")
-                                            .setMessage("server is down")
-                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    dialogInterface.dismiss();
-                                                }
-                                            })
-                                            .create();
-                                    noServerAlert.show();
-                                }
-                                else{
-                                    Toast.makeText(getActivity(), getString(R.string.toast_server_wrong), Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                        }
-                        else{
-                            Boolean cb = pref.getBoolean("show_dialogs", false);
-                            if (cb.equals(true)) {
-                                AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                                noServerAlert.setTitle("Attenzione!")
-                                        .setMessage(getString(R.string.toast_server_wrong))
+                            if (err_msg.equals("no_meas")) {
+                                AlertDialog.Builder noMeasAlert = new AlertDialog.Builder(getActivity());
+                                noMeasAlert.setTitle("Attenzione!")
+                                        .setMessage("Nessun parametro misurato in questa data!")
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -284,11 +246,62 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                                             }
                                         })
                                         .create();
-                                noServerAlert.show();
+                                noMeasAlert.show();
                             }
-                            else{
-                                Toast.makeText(getActivity(), getString(R.string.toast_server_wrong), Toast.LENGTH_LONG).show();
+                            if (err_msg.equals("no_device")) {
+                                AlertDialog.Builder noDeviceAlert = new AlertDialog.Builder(getActivity());
+                                noDeviceAlert.setTitle("Attenzione!")
+                                        .setMessage("I dispositivi di monitoraggio dei parametri non sono ancora associati al paziente!")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        })
+                                        .create();
+                                noDeviceAlert.show();
                             }
+                            if (err_msg.equals("not_valid_date")) {
+                                AlertDialog.Builder noDateAlert = new AlertDialog.Builder(getActivity());
+                                noDateAlert.setTitle("Attenzione!")
+                                        .setMessage("Inserisci una data valida!")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        })
+                                        .create();
+                                noDateAlert.show();
+                            }
+                            if (err_msg.equals("no_date")) {
+                                AlertDialog.Builder noDateAlert = new AlertDialog.Builder(getActivity());
+                                noDateAlert.setTitle("Attenzione!")
+                                        .setMessage("Non hai inserito nessuna data!")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        })
+                                        .create();
+                                noDateAlert.show();
+                            }
+
+
+                        }
+                        else{
+                            AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
+                            noServerAlert.setTitle("Attenzione!")
+                                    .setMessage("Errore di connessione al server")
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    })
+                                    .create();
+                            noServerAlert.show();
                         }
 
                         error.printStackTrace();
@@ -298,7 +311,7 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("id_pat", id_pat);
+                params.put("pat_id", id_pat);
                 params.put("date", date);
                 return params;
             }

@@ -76,9 +76,20 @@
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".BloodAnalysisActivity"
+        <activity
+            android:name=".BloodAnalysisActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".DiaryEmoActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ThresholdsSettingsActivity"
                   android:launchMode="singleTask"
-                  android:theme="@style/AppTheme.NoActionBar">
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
     </application>
 

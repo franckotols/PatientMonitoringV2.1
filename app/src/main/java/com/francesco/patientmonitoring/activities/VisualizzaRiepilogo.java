@@ -139,7 +139,7 @@ public class VisualizzaRiepilogo extends AppCompatActivity {
 
             pref = PreferenceManager.getDefaultSharedPreferences(this);
             final String server_addr = pref.getString("service_provider", "");
-            final String finalServer_addr = server_addr + "/registration";
+            final String finalServer_addr = server_addr + "/api/registration";
 
             bRegistra.setOnClickListener(new View.OnClickListener() {
                 @Override

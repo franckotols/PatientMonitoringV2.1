@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             loginPrefsEditor.clear();
             loginPrefsEditor.commit();
         }
-        final String final_addr = url+"/authentication";
+        final String final_addr = url+"/api/login";
         final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
         pd.setMessage(getString(R.string.process_dialog_waiting));
         pd.show();

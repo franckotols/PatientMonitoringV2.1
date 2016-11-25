@@ -37,7 +37,10 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,8 +66,6 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
 
 
     String id_pat;
-    String fromDateStr;
-    String toDateStr;
 
     Spinner paramSelectorSpinner;
     Spinner dateIntervalSelectorSpinner;
@@ -75,11 +76,6 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
     ArrayList<SpinnerParams> intervals;
     SharedPreferences pref;
 
-    private EditText fromDateEtxt;
-    private EditText toDateEtxt;
-    //private DatePickerDialog fromDatePickerDialog;
-    //private DatePickerDialog toDatePickerDialog;
-    //private SimpleDateFormat dateFormatter;
 
     private LineGraphSeries<DataPoint> mSeries1;
     private GraphView graph;
@@ -87,6 +83,9 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
 
 
     JSONObject jsonServerResp;
+
+    //per la gestione con le stringhe nell'asse x
+    String[] datesStr;
 
 
     @Override
@@ -147,35 +146,21 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
         });
 
         /*
-         * DatePickerInitialization
-
-
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-        fromDateEtxt = (EditText) rootview.findViewById(R.id.etxt_fromdate);
-        fromDateEtxt.setInputType(InputType.TYPE_NULL);
-        fromDateEtxt.requestFocus();
-
-        toDateEtxt = (EditText) rootview.findViewById(R.id.etxt_todate);
-        toDateEtxt.setInputType(InputType.TYPE_NULL);
-
-        fromDateEtxt.setOnClickListener(this);
-        toDateEtxt.setOnClickListener(this);
-    */
-
-
-        /*
          * Graph initialization
          */
-
-
         graph = (GraphView)rootview.findViewById(R.id.graph);
         mSeries1 = new LineGraphSeries<>();
-
-
-
+        /**
+        mSeries1.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+                Toast.makeText(getActivity(),String.valueOf(dataPoint),Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
         return rootview;
     }
+
     private ArrayList<SpinnerParams> setDateInterval(){
         ArrayList<SpinnerParams> params = new ArrayList<>();
         String[] ids = getResources().getStringArray(R.array.mean_selector_ids);
@@ -197,54 +182,18 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
         return params;
     }
 
-    //per la selezione della data
-    /*
-    private void setDateTimeField() {
-        fromDateEtxt.setOnClickListener(this);
-        toDateEtxt.setOnClickListener(this);
 
-        Calendar newCalendar = Calendar.getInstance();
-        fromDatePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                fromDateEtxt.setText(dateFormatter.format(newDate.getTime()));
-                fromDateStr = dateFormatter.format(newDate.getTime());
-            }
-
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-        toDatePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                toDateEtxt.setText(dateFormatter.format(newDate.getTime()));
-                toDateStr = dateFormatter.format(newDate.getTime());
-            }
-
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-    }
-    */
     //Volley request
 
     private void sendParams(final String id_pat, final String interval_id, final String param_id) {
 
         //final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //per il test dei grafici
-        final DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 
         LineGraphSeries<DataPoint> series;
         mSeries1 = new LineGraphSeries<>();
-
-        /*if (graph!=null){
-            graph.removeAllSeries();
-        }*/
-
-
-
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String url = pref.getString("service_provider", "");
         //ATTENZIONE
@@ -266,9 +215,9 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                         graph.removeAllSeries();
                         pd.dismiss();
 
-
-
-                        Toast.makeText(getActivity(),response, Toast.LENGTH_SHORT).show();
+                        //*
+                        ArrayList<Date> dates = new ArrayList<>();
+                        //Toast.makeText(getActivity(),response, Toast.LENGTH_SHORT).show();
 
                         try {
                             jsonServerResp = new JSONObject(response);
@@ -280,25 +229,32 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                                 JSONObject json_item = jsonArray.getJSONObject(i);
                                 String date_meas = json_item.getString("measurementDate");
                                 Date dataMisura = format.parse(date_meas);
+                                //*
+                                dates.add(dataMisura);
                                 Integer value = json_item.getInt("value");
                                 points[i] = new DataPoint(dataMisura, value);
 
 
                             }
-
+                            //*
+                            int lenDates = dates.size();
                             mSeries1 = new LineGraphSeries<>(points);
-                            //Date firstDate = dates.get(0);
-                            //Date endDate = dates.get(dim_array);
+                            //*
+                            Date firstDate = dates.get(0);
+                            Date endDate = dates.get(lenDates-1);
                             graph.addSeries(mSeries1);
-                            graph.getGridLabelRenderer().setNumHorizontalLabels(dim_array);
                             // use static labels for horizontal and vertical labels
                             //StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
                             //staticLabelsFormatter.setHorizontalLabels(dates);
                             //graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
                             graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                            //graph.getViewport().setMinX(firstDate.getTime());
-                            //graph.getViewport().setMaxX(endDate.getTime());
-                            //graph.getViewport().setXAxisBoundsManual(true);
+                            graph.getGridLabelRenderer().setNumHorizontalLabels(lenDates);
+                            //*
+                            graph.getViewport().setMinX(firstDate.getTime());
+                            graph.getViewport().setMaxX(endDate.getTime());
+                            //*
+                            graph.getViewport().setXAxisBoundsManual(true);
 
                             //COMMENTANDO QUESTE RIGHE IL  GRAFICO SPARISCE
                             graph.getGridLabelRenderer().setNumHorizontalLabels(dim_array);
@@ -409,7 +365,7 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("id_pat", id_pat);
+                params.put("pat_id", id_pat);
                 params.put("interval_duration", interval_id);
                 params.put("param_id", param_id);
                 return params;

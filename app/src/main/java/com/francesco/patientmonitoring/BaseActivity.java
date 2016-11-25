@@ -163,8 +163,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 return true;
 
             case R.id.nav_diary_emo :
-                //Intent ii = new Intent(this, .class);
-                //startActivity(ii);
+                Intent ii = new Intent(this, DiaryEmoActivity.class);
+                startActivity(ii);
                 return true;
 
             case R.id.nav_blood:
@@ -178,8 +178,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 return true;
 
             case R.id.nav_threshold:
-                //Intent iiiii = new Intent(this, PhysicianMessagesActivity.class);
-                //startActivity(iiiii);
+                Intent iiiii = new Intent(this, ThresholdsSettingsActivity.class);
+                startActivity(iiiii);
                 return true;
 
             case R.id.nav_send_message:

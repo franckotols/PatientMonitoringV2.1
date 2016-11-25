@@ -116,7 +116,7 @@ public class NotificheFragment extends Fragment {
         //get server url
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         String url = pref.getString("service_provider", "");
-        final String final_addr = url + "/notifications?physician_ID="+ PhysicianInfo.getPhysician_id()+"&api="+alert_selector_id;
+        final String final_addr = url + "/alarms?physician_ID="+ PhysicianInfo.getPhysician_id()+"&api="+alert_selector_id;
         final ProgressDialog pd = new ProgressDialog(getContext());
         pd.setMessage(getString(R.string.process_dialog_waiting));
 

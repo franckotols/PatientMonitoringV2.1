@@ -1,9 +1,9 @@
 <resources>
 
     <!--Titles screens-->
-    <string name="app_name">PatientMonitoringV2</string>
+    <string name="app_name">PatientMonitoring</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Registrati</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_visualizza_riepilogo">VisualizzaRiepilogo</string>
     <string name="home_label">Home</string>

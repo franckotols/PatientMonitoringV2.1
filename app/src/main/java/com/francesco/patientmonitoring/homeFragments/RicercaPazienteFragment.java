@@ -85,7 +85,7 @@ public class RicercaPazienteFragment extends Fragment implements View.OnClickLis
 
         pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         final String server_addr = pref.getString("service_provider", "");
-        final String final_addr = server_addr + "/diseases";
+        final String final_addr = server_addr + "/api/diseases";
         bSearch = (Button) rootview.findViewById(R.id.search_button);
         bSearch.setOnClickListener(this);
         etName = (EditText) rootview.findViewById(R.id.patient_name);
@@ -160,7 +160,7 @@ public class RicercaPazienteFragment extends Fragment implements View.OnClickLis
             }
         }
 
-        final String final_addr = url + "/searchPatient";
+        final String final_addr = url + "/api/searchPatient";
         final ProgressDialog pd = new ProgressDialog(getContext());
         pd.setMessage(getString(R.string.process_dialog_waiting));
         pd.show();

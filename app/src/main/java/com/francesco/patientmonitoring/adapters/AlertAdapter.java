@@ -117,7 +117,7 @@ public class AlertAdapter extends ArrayAdapter {
     private void sendParams(final String id, final String status){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         String url = pref.getString("service_provider", "");
-        final String final_addr = url+"/notifications";
+        final String final_addr = url+"/alarms";
         final ProgressDialog pd = new ProgressDialog(getContext());
         pd.setMessage(getContext().getString(R.string.process_dialog_waiting));
         pd.show();

@@ -44,6 +44,7 @@ public class RicercaPazienteFragment extends Fragment implements View.OnClickLis
 
     View rootview;
 
+
     /**
      * Volley Needs
      **/

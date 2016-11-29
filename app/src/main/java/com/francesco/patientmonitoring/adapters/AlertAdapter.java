@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public class AlertAdapter extends ArrayAdapter {
 
-    List list = new ArrayList();
+    List<Alerts> list = new ArrayList<Alerts>();
     public static final String KEY_ID_ALERT= "alert_id";
     public static final String KEY_STATUS_ALERT = "alert_status";
 
@@ -62,7 +62,7 @@ public class AlertAdapter extends ArrayAdapter {
 
         View row;
         row = convertView;
-        AlertHolder alertHolder;
+        final AlertHolder alertHolder;
         final Alerts alerts =(Alerts) this.getItem(position);
         if(row == null){
             LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -76,6 +76,12 @@ public class AlertAdapter extends ArrayAdapter {
             alertHolder.cbRead.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    /**inizio modifiche
+                    int getPosition = (Integer) compoundButton.getTag();
+                    String status = list.get(getPosition).getRead_status();
+                    if (status.equals("true")) {alertHolder.cbRead.setChecked(true);}
+                    else{alertHolder.cbRead.setChecked(false);}
+                    //fine modifiche*/
                     if (compoundButton.isPressed()) {
                         if (compoundButton.isChecked()) {
                             //Toast.makeText(getContext(), "checked", Toast.LENGTH_LONG).show();
@@ -93,6 +99,8 @@ public class AlertAdapter extends ArrayAdapter {
         else{
             alertHolder = (AlertHolder)row.getTag();
         }
+        //modifica
+        //alertHolder.cbRead.setTag(position);
 
 
         alertHolder.tx_pat_name.setText(alerts.getPatient_name());

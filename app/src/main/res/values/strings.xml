@@ -153,5 +153,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!--permissions-->
+    <!-- Permissions -->
+    <string name="perm">Non hai concesso un permesso necessario al funzionamento dell\'applicazione. Ciò potrebbe comprometterne il funzionamento.</string>
+
 
 </resources>

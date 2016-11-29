@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public class AlertAdapter extends ArrayAdapter {
 
-    List<Alerts> list = new ArrayList<Alerts>();
+    private List<Alerts> list  = new ArrayList<Alerts>();
     public static final String KEY_ID_ALERT= "alert_id";
     public static final String KEY_STATUS_ALERT = "alert_status";
 
@@ -76,12 +76,11 @@ public class AlertAdapter extends ArrayAdapter {
             alertHolder.cbRead.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    /**inizio modifiche
+
                     int getPosition = (Integer) compoundButton.getTag();
-                    String status = list.get(getPosition).getRead_status();
-                    if (status.equals("true")) {alertHolder.cbRead.setChecked(true);}
-                    else{alertHolder.cbRead.setChecked(false);}
-                    //fine modifiche*/
+                    if (compoundButton.isChecked()){list.get(getPosition).setRead_status("true");}
+                    else if (!compoundButton.isChecked()){list.get(getPosition).setRead_status("false");}
+
                     if (compoundButton.isPressed()) {
                         if (compoundButton.isChecked()) {
                             //Toast.makeText(getContext(), "checked", Toast.LENGTH_LONG).show();
@@ -100,7 +99,7 @@ public class AlertAdapter extends ArrayAdapter {
             alertHolder = (AlertHolder)row.getTag();
         }
         //modifica
-        //alertHolder.cbRead.setTag(position);
+        alertHolder.cbRead.setTag(position);
 
 
         alertHolder.tx_pat_name.setText(alerts.getPatient_name());
@@ -110,6 +109,9 @@ public class AlertAdapter extends ArrayAdapter {
         String status = alerts.getRead_status();
         if (status.equals("true")) {
             alertHolder.cbRead.setChecked(true);
+        }
+        else {
+            alertHolder.cbRead.setChecked(false);
         }
 
         return row;

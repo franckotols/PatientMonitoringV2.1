@@ -94,7 +94,7 @@ public class ThresholdsSettingsActivity extends BaseActivity implements View.OnC
         final String city = PatientInfo.getPatient_city();
         final String birthdate = PatientInfo.getPatient_birthdate();
 
-        setTitle(nome+" - Imposta soglie parametri");
+        setTitle(nome+" - "+getString(R.string.set_thersh_par));
 
         tvNome = (TextView)findViewById(R.id.tv_nomePaziente);
         tvCity = (TextView)findViewById(R.id.tv_cittàPaziente);
@@ -156,8 +156,8 @@ public class ThresholdsSettingsActivity extends BaseActivity implements View.OnC
 
         if (id == R.id.action_home){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(ThresholdsSettingsActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi tornare alla home?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.back_home_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -178,8 +178,8 @@ public class ThresholdsSettingsActivity extends BaseActivity implements View.OnC
 
         if (id == R.id.action_logout){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(ThresholdsSettingsActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi effettuare il logout?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.logout_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -287,8 +287,8 @@ public class ThresholdsSettingsActivity extends BaseActivity implements View.OnC
                             if (err_msg.equals("error")) {
 
                                 AlertDialog.Builder noServerAlert = new AlertDialog.Builder(ThresholdsSettingsActivity.this);
-                                noServerAlert.setTitle("Attenzione!")
-                                        .setMessage("Problemi di connessione al server!")
+                                noServerAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.no_server_connection))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -304,8 +304,8 @@ public class ThresholdsSettingsActivity extends BaseActivity implements View.OnC
                         {
 
                             AlertDialog.Builder noServerAlert = new AlertDialog.Builder(ThresholdsSettingsActivity.this);
-                            noServerAlert.setTitle("Attenzione!")
-                                    .setMessage("Problema di Connessione al Server, attendere!")
+                            noServerAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.no_server_connection))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -349,7 +349,7 @@ public class ThresholdsSettingsActivity extends BaseActivity implements View.OnC
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(ThresholdsSettingsActivity.this,"Richiesta avvenuta con successo",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ThresholdsSettingsActivity.this,getString(R.string.thresh_succ_string),Toast.LENGTH_LONG).show();
                         getThreshForPatient(pat_id);
                         setTextViews();
 
@@ -377,8 +377,8 @@ public class ThresholdsSettingsActivity extends BaseActivity implements View.OnC
 
                             if (err_msg.equals("error")) {
                                 AlertDialog.Builder badRequestAlert = new AlertDialog.Builder(ThresholdsSettingsActivity.this);
-                                badRequestAlert.setTitle("Attenzione!")
-                                        .setMessage("Problema di connessione!\nImpossibile impostare nuove soglie!")
+                                badRequestAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.thresh_prob_string))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -393,8 +393,8 @@ public class ThresholdsSettingsActivity extends BaseActivity implements View.OnC
                         else {
 
                             AlertDialog.Builder badRequestAlert = new AlertDialog.Builder(ThresholdsSettingsActivity.this);
-                            badRequestAlert.setTitle("Attenzione!")
-                                    .setMessage("Problema di connessione!\nImpossibile impostare nuove soglie!")
+                            badRequestAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.thresh_prob_string))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {

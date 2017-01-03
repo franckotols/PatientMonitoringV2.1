@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Benvenuto nella home del paziente"
+        android:text="@string/home_patient_welcome"
         style="?android:listSeparatorTextViewStyle"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Paziente:"
+            android:text="@string/text_patient"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
         <TextView
             android:id="@+id/tv_pat_name_home"
@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Città:"
+            android:text="@string/city"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
         <TextView
             android:id="@+id/tv_pat_city_home"
@@ -67,7 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Data di nascita:"
+            android:text="@string/birthdate"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
         <TextView
             android:id="@+id/tv_pat_birthdate_home"
@@ -79,6 +79,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Per accedere ai dati del paziente cliccare sul menu a tendina in alto a sinistra. Per i settings, per tornare alla home e per il logout cliccare sul menu in alto a destra"/>
+        android:text="@string/home_patient_descr"/>
 
 </LinearLayout>

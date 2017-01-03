@@ -53,7 +53,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="In questa sezione è possibile visualizzare e modificare le soglie per la generazione di allarmi associati al paziente selezionato. E' sufficiente inserire solo i valori delle soglie che si vogliono modificare. Per fare cio' è necessario premere il bottone in fondo alla pagina."/>
+                android:text="@string/thresh_descr"/>
 
 
         </LinearLayout>
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Soglie Attuali"
+                android:text="@string/thresh_current"
                 style="?android:listSeparatorTextViewStyle"/>
 
             <LinearLayout
@@ -88,12 +88,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Soglia Minima"/>
+                    android:text="@string/thresh_min"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Soglia Massima"/>
+                    android:text="@string/thresh_max"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,7 +104,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pressione Sistolica [mmHg]"/>
+                    android:text="@string/syst_string"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pressione Diastolica [mmHg]"/>
+                    android:text="@string/diast_string"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Frequenza Cardiaca [bpm]"/>
+                    android:text="@string/hr_string"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="SpO2 [%]"/>
+                    android:text="@string/spo2_string"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Glicemia [mg/dL]"/>
+                    android:text="@string/glic_string"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -214,7 +214,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nuove Soglie"
+                android:text="@string/thresh_new"
                 style="?android:listSeparatorTextViewStyle"
                 android:paddingTop="@dimen/activity_vertical_margin"/>
             <LinearLayout
@@ -226,7 +226,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pressione Sistolica [mmHg]"/>
+                    android:text="@string/syst_string"/>
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -251,7 +251,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pressione Diastolica [mmHg]"/>
+                    android:text="@string/diast_string"/>
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -276,7 +276,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Frequenza Cardiaca [bpm]"/>
+                    android:text="@string/hr_string"/>
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -301,7 +301,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="SpO2 [%]"/>
+                    android:text="@string/spo2_string"/>
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -326,7 +326,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Glicemia [mg/dL]"/>
+                    android:text="@string/glic_string"/>
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -346,7 +346,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Imposta nuove soglie"
+                android:text="@string/thresh_btn"
                 android:id="@+id/btn_thresh_new"
                 android:layout_gravity="center"/>
 

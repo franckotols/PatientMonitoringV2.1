@@ -266,8 +266,8 @@ public class ParametriValoriMediFragment extends Fragment {
                             if (err_msg.equals("no_device")) {
 
                                 AlertDialog.Builder noDeviceAlert = new AlertDialog.Builder(getActivity());
-                                noDeviceAlert.setTitle("Attenzione!")
-                                        .setMessage("I dispositivi di monitoraggio dei parametri non sono ancora associati al paziente!")
+                                noDeviceAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.no_devices_alert))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -281,8 +281,8 @@ public class ParametriValoriMediFragment extends Fragment {
                         }
                         else{
                             AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                            noServerAlert.setTitle("Attenzione!")
-                                    .setMessage("Errore di connessione al server")
+                            noServerAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.no_server_connection))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {

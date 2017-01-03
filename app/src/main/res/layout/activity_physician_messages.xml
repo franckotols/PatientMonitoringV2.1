@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="In questa schermata è possibile inviare un messaggio al paziente. Il messaggio verrà visualizzato nella sua App"
+            android:text="@string/send_mess_descr"
             android:layout_marginTop="10dp"/>
 
     </LinearLayout>
@@ -68,7 +68,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Destinatario"
+            android:text="@string/dest_string"
             style="?android:listSeparatorTextViewStyle"/>
         <TextView
             android:layout_width="wrap_content"
@@ -99,19 +99,13 @@
             android:singleLine="false"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:background="@color/white"
-            android:hint="Scrivi messaggio..."/>
+            android:hint="@string/write_mess_hint"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/send_message"
-            android:text="Invia"/>
-
-
-
-
-
-
+            android:text="@string/btn_send_string"/>
 
     </LinearLayout>
 

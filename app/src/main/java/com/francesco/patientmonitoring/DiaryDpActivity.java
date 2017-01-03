@@ -112,7 +112,7 @@ public class DiaryDpActivity extends BaseActivity {
         final String city = PatientInfo.getPatient_city();
         final String birthdate = PatientInfo.getPatient_birthdate();
 
-        setTitle(nome+" - Diario Clinico");
+        setTitle(nome+" - "+getString(R.string.diario_clinico));
         tvNome = (TextView)findViewById(R.id.tv_nomePaziente);
         tvCity = (TextView)findViewById(R.id.tv_cittàPaziente);
         tvBirthdate = (TextView)findViewById(R.id.tv_birthPaziente);
@@ -188,19 +188,19 @@ public class DiaryDpActivity extends BaseActivity {
                 tvEndTime.setText(endTime);
                 //booleans
                 boolean abdPain = measure.isAbdPain();
-                if (abdPain){tvAbdPain.setText("Si");tvAbdPain.setTextColor(0xffff0000);} else {tvAbdPain.setText("No");}
+                if (abdPain){tvAbdPain.setText(getString(R.string.yes_string));tvAbdPain.setTextColor(0xffff0000);} else {tvAbdPain.setText(getString(R.string.no_string));}
                 boolean diarrhea = measure.isDiarrhea();
-                if (diarrhea){tvDiarr.setText("Si");tvDiarr.setTextColor(0xffff0000);} else {tvDiarr.setText("No");}
+                if (diarrhea){tvDiarr.setText(getString(R.string.yes_string));tvDiarr.setTextColor(0xffff0000);} else {tvDiarr.setText(getString(R.string.no_string));}
                 boolean dischProbs = measure.isDischProbs();
-                if (dischProbs){tvDiffDisch.setText("Si");tvDiffDisch.setTextColor(0xffff0000);} else {tvDiffDisch.setText("No");}
+                if (dischProbs){tvDiffDisch.setText(getString(R.string.yes_string));tvDiffDisch.setTextColor(0xffff0000);} else {tvDiffDisch.setText(getString(R.string.no_string));}
                 boolean nausea = measure.isNausea();
-                if (nausea){tvNausea.setText("Si");tvNausea.setTextColor(0xffff0000);} else {tvNausea.setText("No");}
+                if (nausea){tvNausea.setText(getString(R.string.yes_string));tvNausea.setTextColor(0xffff0000);} else {tvNausea.setText(getString(R.string.no_string));}
                 boolean sameConc = measure.isSameConc();
-                if (sameConc){tvSameConc.setText("Si");} else {tvSameConc.setText("No");}
+                if (sameConc){tvSameConc.setText(getString(R.string.yes_string));} else {tvSameConc.setText(getString(R.string.no_string));}
                 boolean turbidDisch = measure.isTurbidDisch();
-                if (turbidDisch){tvTorbidDischLiquid.setText("Si");tvTorbidDischLiquid.setTextColor(0xffff0000);} else {tvTorbidDischLiquid.setText("No");}
+                if (turbidDisch){tvTorbidDischLiquid.setText(getString(R.string.yes_string));tvTorbidDischLiquid.setTextColor(0xffff0000);} else {tvTorbidDischLiquid.setText(getString(R.string.no_string));}
                 boolean vomit = measure.isVomit();
-                if (vomit){tvVomit.setText("Si");tvVomit.setTextColor(0xffff0000);} else {tvVomit.setText("No");}
+                if (vomit){tvVomit.setText(getString(R.string.yes_string));tvVomit.setTextColor(0xffff0000);} else {tvVomit.setText(getString(R.string.no_string));}
                 //integers
                 int ant_bags = measure.getAnt_bags();
                 tvAntib.setText(String.valueOf(ant_bags));
@@ -309,8 +309,8 @@ public class DiaryDpActivity extends BaseActivity {
 
         if (id == R.id.action_home){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(DiaryDpActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi tornare alla home?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.back_home_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -331,8 +331,8 @@ public class DiaryDpActivity extends BaseActivity {
 
         if (id == R.id.action_logout){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(DiaryDpActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi effettuare il logout?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.logout_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -487,7 +487,7 @@ public class DiaryDpActivity extends BaseActivity {
 
                                 AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(DiaryDpActivity.this);
                                 wrongParamsAlert.setTitle(getString(R.string.attention_message))
-                                        .setMessage("Non ci sono analisi da visualizzare")
+                                        .setMessage(getString(R.string.no_analysis))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -505,8 +505,8 @@ public class DiaryDpActivity extends BaseActivity {
                         else {
 
                             AlertDialog.Builder noServerAlert = new AlertDialog.Builder(DiaryDpActivity.this);
-                            noServerAlert.setTitle("Attenzione!")
-                                    .setMessage("Problemi di connessione al server")
+                            noServerAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.no_server_connection))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {

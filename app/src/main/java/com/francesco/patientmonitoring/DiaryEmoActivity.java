@@ -105,7 +105,7 @@ public class DiaryEmoActivity extends BaseActivity {
         final String city = PatientInfo.getPatient_city();
         final String birthdate = PatientInfo.getPatient_birthdate();
 
-        setTitle(nome+" - Diario Clinico");
+        setTitle(nome+" - "+getString(R.string.diario_clinico));
         tvNome = (TextView)findViewById(R.id.tv_nomePaziente);
         tvCity = (TextView)findViewById(R.id.tv_cittàPaziente);
         tvBirthdate = (TextView)findViewById(R.id.tv_birthPaziente);
@@ -226,9 +226,9 @@ public class DiaryEmoActivity extends BaseActivity {
                 String emoVenPressEndHour = measure.getEmoVenPressEndHour();
                 tvEmoVenPressEndHour.setText(emoVenPressEndHour);
                 boolean emoCramp = measure.isEmoCramp();
-                if (emoCramp){tvEmoCramp.setText("Si");tvEmoCramp.setTextColor(0xffff0000);}else{tvEmoCramp.setText("No");}
+                if (emoCramp){tvEmoCramp.setText(getString(R.string.yes_string));tvEmoCramp.setTextColor(0xffff0000);}else{tvEmoCramp.setText(getString(R.string.no_string));}
                 boolean emoFever = measure.isEmoFever();
-                if (emoFever){tvEmoFever.setText("Si");tvEmoFever.setTextColor(0xffff0000);}else{tvEmoFever.setText("No");}
+                if (emoFever){tvEmoFever.setText(getString(R.string.yes_string));tvEmoFever.setTextColor(0xffff0000);}else{tvEmoFever.setText(getString(R.string.no_string));}
                 String emoListDisMonitor = measure.getEmoListDisMonitor();
                 tvEmoListDisMonitor.setText(emoListDisMonitor);
                 String emoListDisOsm = measure.getEmoListDisOsm();
@@ -281,8 +281,8 @@ public class DiaryEmoActivity extends BaseActivity {
 
         if (id == R.id.action_home){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(DiaryEmoActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi tornare alla home?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.back_home_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -303,8 +303,8 @@ public class DiaryEmoActivity extends BaseActivity {
 
         if (id == R.id.action_logout){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(DiaryEmoActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi effettuare il logout?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.logout_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -441,7 +441,7 @@ public class DiaryEmoActivity extends BaseActivity {
 
                                 AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(DiaryEmoActivity.this);
                                 wrongParamsAlert.setTitle(getString(R.string.attention_message))
-                                        .setMessage("Non ci sono analisi da visualizzare")
+                                        .setMessage(getString(R.string.no_analysis))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -459,8 +459,8 @@ public class DiaryEmoActivity extends BaseActivity {
                         else {
 
                             AlertDialog.Builder noServerAlert = new AlertDialog.Builder(DiaryEmoActivity.this);
-                            noServerAlert.setTitle("Attenzione!")
-                                    .setMessage("Problemi di connessione al server")
+                            noServerAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.no_server_connection))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {

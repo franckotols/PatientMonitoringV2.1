@@ -172,8 +172,8 @@ public class NotificheFragment extends Fragment {
                             if (err_msg.equals("no_values_not_read")) {
 
                                 AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(getActivity());
-                                wrongParamsAlert.setTitle("Attenzione!")
-                                        .setMessage("Non ci sono Allarmi non visualizzati!")
+                                wrongParamsAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.no_unread_alerts_dialog))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -187,8 +187,8 @@ public class NotificheFragment extends Fragment {
                             if (err_msg.equals("no_values")) {
 
                                 AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                                noServerAlert.setTitle("Attenzione!")
-                                        .setMessage("Non ci sono allarmi!")
+                                noServerAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.no_alerts_dialog))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -202,8 +202,8 @@ public class NotificheFragment extends Fragment {
                             if (err_msg.equals("error")) {
 
                                 AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                                noServerAlert.setTitle("Attenzione!")
-                                        .setMessage("Problemi di connessione al server!")
+                                noServerAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.no_server_connection))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -219,8 +219,8 @@ public class NotificheFragment extends Fragment {
                         {
 
                             AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                            noServerAlert.setTitle("Attenzione!")
-                                    .setMessage("Problema di Connessione al Server, attendere!")
+                            noServerAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.no_server_connection))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {

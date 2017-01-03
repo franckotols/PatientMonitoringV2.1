@@ -47,24 +47,24 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="In questa sezione è possibile visualizzare tutte le misure effettuate nell'arco del giorno selezionato. Ad ogni misura è associato l'orario in cui è stata effettuata."/>
+                android:text="@string/point_val_descr1"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Inserire la data di interesse nello spazio sottostante e premere il bottone per avviare la ricerca"/>
+                android:text="@string/point_val_descr2"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Cliccare per inserire la data"
+                android:hint="@string/date_et_string"
                 android:id="@+id/etxt_date"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/search_day_btn"
-                android:text="Cerca"
+                android:text="@string/btn_search_string"
                 android:layout_gravity="center"/>
 
 
@@ -91,7 +91,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Data:"
+                    android:text="@string/text_date"
                     style="?android:listSeparatorTextViewStyle"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
@@ -112,7 +112,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Sistolica [mmHg]:"
+                    android:text="@string/syst_string2"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/tv_press_sist"
@@ -132,7 +132,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Diastolica [mmHg]:"
+                    android:text="@string/diast_string2"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/tv_press_diast"
@@ -152,7 +152,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Frequenza Cardiaca [bpm]:"
+                    android:text="@string/hr_string2"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/tv_heart_rate"
@@ -172,7 +172,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="SpO2 [%]:"
+                    android:text="@string/spo2_string2"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/tv_spo2"
@@ -193,7 +193,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Glicemia [mg/dL]:"
+                    android:text="@string/glic_string2"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/tv_glic"

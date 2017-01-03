@@ -145,8 +145,8 @@ public class PromemoriaFragment extends Fragment implements View.OnClickListener
 
             else{
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
-                alertBuilder.setTitle("Attenzione");
-                alertBuilder.setMessage("Seleziona giorno ed ora del promemoria");
+                alertBuilder.setTitle(getString(R.string.attention_message));
+                alertBuilder.setMessage(getString(R.string.select_date_prom));
                 AlertDialog alertDialog = alertBuilder.create();
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",  new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -230,7 +230,7 @@ public class PromemoriaFragment extends Fragment implements View.OnClickListener
                 } else {
 
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
-                    alertBuilder.setTitle("Attenzione");
+                    alertBuilder.setTitle(getString(R.string.attention_message));
                     alertBuilder.setMessage(this.getString(R.string.perm));
                     AlertDialog alertDialog = alertBuilder.create();
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",  new DialogInterface.OnClickListener() {

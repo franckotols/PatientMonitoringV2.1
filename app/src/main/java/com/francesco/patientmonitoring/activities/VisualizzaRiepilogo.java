@@ -159,7 +159,7 @@ public class VisualizzaRiepilogo extends AppCompatActivity {
 
                                     AlertDialog.Builder succRegAlert = new AlertDialog.Builder(VisualizzaRiepilogo.this);
                                     succRegAlert.setTitle("")
-                                            .setMessage("Registrazione avvenuta con successo")
+                                            .setMessage(getString(R.string.dialog_registration))
                                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {

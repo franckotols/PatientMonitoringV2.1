@@ -36,7 +36,7 @@ public class HomePazienteActivity extends BaseActivity {
         final String birthdate = PatientInfo.getPatient_birthdate();
         ArrayList<String> disease = PatientInfo.getList();
 
-        setTitle(nome+" - Home");
+        setTitle(nome+" - "+getString(R.string.home_patient));
 
         tvNome = (TextView)findViewById(R.id.tv_pat_name_home);
         tvCity = (TextView)findViewById(R.id.tv_pat_city_home);
@@ -66,8 +66,8 @@ public class HomePazienteActivity extends BaseActivity {
 
         if (id == R.id.action_home){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(HomePazienteActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi tornare alla home?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.back_home_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -88,8 +88,8 @@ public class HomePazienteActivity extends BaseActivity {
 
         if (id == R.id.action_logout){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(HomePazienteActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi effettuare il logout?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.logout_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {

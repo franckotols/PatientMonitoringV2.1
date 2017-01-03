@@ -297,8 +297,8 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                             if (err_msg.equals("empty")) {
 
                                 AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(getActivity());
-                                wrongParamsAlert.setTitle("Attenzione!")
-                                        .setMessage("Non ci sono valori da mostrare nell'intervallo selezionato ")
+                                wrongParamsAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.graph_alert_no_values))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -312,8 +312,8 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                             if (err_msg.equals("error")) {
 
                                     AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                                    noServerAlert.setTitle("Attenzione!")
-                                            .setMessage("Problema di Connessione al Server, attendere!")
+                                    noServerAlert.setTitle(getString(R.string.attention_message))
+                                            .setMessage(getString(R.string.no_server_connection))
                                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -327,8 +327,8 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                             if (err_msg.equals("no_device")) {
 
                                 AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                                noServerAlert.setTitle("Attenzione!")
-                                        .setMessage("I dispositivi di monitoraggio dei parametri non sono ancora associati al paziente!")
+                                noServerAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.graph_alert_no_devices))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -344,8 +344,8 @@ public class ParametriGraficiFragment extends Fragment implements View.OnClickLi
                         {
 
                             AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                            noServerAlert.setTitle("Attenzione!")
-                                    .setMessage("Problema di Connessione al Server, attendere!")
+                            noServerAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.no_server_connection))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {

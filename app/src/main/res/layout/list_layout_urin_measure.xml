@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:text="Data"
+            android:text="@string/text_date"
             android:textAppearance="?android:attr/textAppearanceSmall"/>
         <TextView
             android:id="@+id/date_urin_event_tv"
@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:text="Strip"
+            android:text="@string/text_strip"
             android:textAppearance="?android:attr/textAppearanceSmall"/>
         <TextView
             android:id="@+id/manufacturer_strip"

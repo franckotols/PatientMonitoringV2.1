@@ -68,7 +68,7 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
 
         physician_id = PhysicianInfo.getPhysician_id();
 
-        setTitle("Invia messaggio a "+nome);
+        setTitle(getString(R.string.send_message_label)+nome);
 
 
 
@@ -116,8 +116,8 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
 
         if (id == R.id.action_home){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(PhysicianMessagesActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi tornare alla home?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.back_home_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -138,8 +138,8 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
 
         if (id == R.id.action_logout){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(PhysicianMessagesActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi effettuare il logout?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.logout_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -176,8 +176,8 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
         message = String.valueOf(etMessage.getText());
         if (message.equals("")){
             AlertDialog.Builder noMessageAlert = new AlertDialog.Builder(this);
-            noMessageAlert.setTitle("Attenzione!")
-                    .setMessage("Nessun messaggio inserito")
+            noMessageAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.no_message_string))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -190,8 +190,8 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
         else {
 
             AlertDialog.Builder yesMessageAlert = new AlertDialog.Builder(this);
-            yesMessageAlert.setTitle("Invio messaggio...")
-                    .setMessage("Continuare?")
+            yesMessageAlert.setTitle(getString(R.string.sending_string))
+                    .setMessage(getString(R.string.continue_string))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -225,7 +225,7 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(PhysicianMessagesActivity.this, "Messaggio Inviato", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PhysicianMessagesActivity.this, getString(R.string.message_sent), Toast.LENGTH_SHORT).show();
 
                     }
                 },
@@ -250,8 +250,8 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
 
                             if (err_msg.equals("error")) {
                                 AlertDialog.Builder badRequestAlert = new AlertDialog.Builder(PhysicianMessagesActivity.this);
-                                badRequestAlert.setTitle("Attenzione!")
-                                        .setMessage("Problema di connessione!\nImpossibile inviare il messaggio!")
+                                badRequestAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.sending_problem_string))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -266,8 +266,8 @@ public class PhysicianMessagesActivity extends BaseActivity implements View.OnCl
                         else {
 
                             AlertDialog.Builder badRequestAlert = new AlertDialog.Builder(PhysicianMessagesActivity.this);
-                            badRequestAlert.setTitle("Attenzione!")
-                                    .setMessage("Problema di connessione!\nImpossibile inviare il messaggio!")
+                            badRequestAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.sending_problem_string))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {

@@ -4,10 +4,10 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home_paziente"
-            android:title="Home Paziente"/>
+            android:title="@string/home_patient"/>
         <item
             android:id="@+id/nav_parameters"
-            android:title="@string/parametri"/>
+            android:title="@string/parameters"/>
         <item
             android:id="@+id/nav_diary_dp"
             android:title="@string/diario_clinico"/>
@@ -19,13 +19,13 @@
             android:title="@string/esami_sangue"/>
         <item
             android:id="@+id/nav_urin_analysis"
-            android:title="Analisi Urine"/>
+            android:title="@string/urin_analysis"/>
         <item
             android:id="@+id/nav_threshold"
-            android:title="Imposta Soglie Parametri"/>
+            android:title="@string/set_thersh_par"/>
         <item
             android:id="@+id/nav_send_message"
-            android:title="Invia un messaggio"/>
+            android:title="@string/send_mess"/>
     </group>
 
 </menu>

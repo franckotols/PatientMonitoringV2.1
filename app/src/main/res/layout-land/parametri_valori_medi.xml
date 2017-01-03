@@ -51,18 +51,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="In questa sezione sono riportati i valori medi di alcuni parametri del paziente,del mese precedente e del mese prima"
+                android:text="@string/mean_val_description"
                 android:layout_marginTop="10dp"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/search_mean_values"
-                android:text="Cerca"/>
+                android:text="@string/btn_search_string"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Premere il bottone per inviare la richiesta al server"/>
+                android:text="@string/mean_val_description2"/>
 
 
         </LinearLayout>
@@ -92,12 +92,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Penultimo Mese"
+                    android:text="@string/second_last_month_string"
                     style="?android:listSeparatorTextViewStyle"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
-                    android:text="Ultimo Mese"
+                    android:text="@string/last_month_string"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     style="?android:listSeparatorTextViewStyle"
@@ -116,7 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pressione Sistolica [mmHg]"
+                    android:text="@string/syst_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -143,7 +143,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pressione Diastolica [mmHg]"
+                    android:text="@string/diast_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -171,7 +171,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Frequenza Cardiaca [bpm]"
+                    android:text="@string/hr_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -199,7 +199,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="SpO2 [%]"
+                    android:text="@string/spo2_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -227,7 +227,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Glicemia [mg/dL]"
+                    android:text="@string/glic_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -255,7 +255,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Peso [kg]"
+                    android:text="@string/weight_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -283,7 +283,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="BMI"
+                    android:text="@string/bmi_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -311,7 +311,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Grasso corporeo [%]"
+                    android:text="@string/fat_body_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -339,7 +339,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Acqua Corporea [%]"
+                    android:text="@string/water_body_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -366,7 +366,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Massa Muscolare [Kg]"
+                    android:text="@string/muscle_mass_string"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:layout_width="0dp"
@@ -393,7 +393,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Massa Ossea [Kg]"
+                    android:text="@string/bone_mass_string"
                     android:paddingBottom="8dp"
                     android:paddingTop="16dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>

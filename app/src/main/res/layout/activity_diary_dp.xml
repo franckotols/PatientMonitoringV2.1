@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cliccare su uno degli elementi della lista per visualizzare il risultato dell'analisi relativo alla data riportata"
+            android:text="@string/diaries_descr1"
             android:layout_marginTop="10dp"/>
 
 
@@ -79,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Data:"
+                android:text="@string/text_date"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
             <TextView
                 android:id="@+id/tv_date_diary"

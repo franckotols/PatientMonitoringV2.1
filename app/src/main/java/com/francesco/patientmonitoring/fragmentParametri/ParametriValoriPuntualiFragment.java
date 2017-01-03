@@ -237,8 +237,8 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                             }
                             if (err_msg.equals("no_meas")) {
                                 AlertDialog.Builder noMeasAlert = new AlertDialog.Builder(getActivity());
-                                noMeasAlert.setTitle("Attenzione!")
-                                        .setMessage("Nessun parametro misurato in questa data!")
+                                noMeasAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.pv_not_parameters))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -250,8 +250,8 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                             }
                             if (err_msg.equals("no_device")) {
                                 AlertDialog.Builder noDeviceAlert = new AlertDialog.Builder(getActivity());
-                                noDeviceAlert.setTitle("Attenzione!")
-                                        .setMessage("I dispositivi di monitoraggio dei parametri non sono ancora associati al paziente!")
+                                noDeviceAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.pv_not_devices))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -263,8 +263,8 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                             }
                             if (err_msg.equals("not_valid_date")) {
                                 AlertDialog.Builder noDateAlert = new AlertDialog.Builder(getActivity());
-                                noDateAlert.setTitle("Attenzione!")
-                                        .setMessage("Inserisci una data valida!")
+                                noDateAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.pv_not_valid_date))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -276,8 +276,8 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                             }
                             if (err_msg.equals("no_date")) {
                                 AlertDialog.Builder noDateAlert = new AlertDialog.Builder(getActivity());
-                                noDateAlert.setTitle("Attenzione!")
-                                        .setMessage("Non hai inserito nessuna data!")
+                                noDateAlert.setTitle(getString(R.string.attention_message))
+                                        .setMessage(getString(R.string.pv_not_date))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -292,8 +292,8 @@ public class ParametriValoriPuntualiFragment extends Fragment implements View.On
                         }
                         else{
                             AlertDialog.Builder noServerAlert = new AlertDialog.Builder(getActivity());
-                            noServerAlert.setTitle("Attenzione!")
-                                    .setMessage("Errore di connessione al server")
+                            noServerAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.no_server_connection))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {

@@ -2,7 +2,6 @@
 
     <!--Titles screens-->
     <string name="app_name">PatientMonitoring</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_register">Registrati</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_visualizza_riepilogo">VisualizzaRiepilogo</string>
@@ -25,11 +24,20 @@
 
 
     <!-- Utils -->
+    <string name="text_patient">Paziente:</string>
+    <string name="text_date">Data:</string>
     <string name="go_button">Vai</string>
     <string name="patient">Paziente</string>
     <string name="graphics">Grafici</string>
     <string name="mean_values">Valori Medi</string>
     <string name="show_values">Mostra valori:</string>
+    <string name="btn_search_string">Cerca</string>
+    <string name="btn_send_string">Invia</string>
+    <string name="par_string">Parametro</string>
+    <string name="val_string">Valore</string>
+    <string name="yes_string">Si</string>
+    <string name="no_string">No</string>
+    <string name="text_strip">Strip:</string>
 
     <!-- Parameters -->
     <string name="pressione">Pressione</string>
@@ -37,17 +45,24 @@
     <string name="glicemia">Glicemia</string>
     <string name="massa">Massa</string>
 
+    <!-- DIALOG MESSAGES -->
+    <string name="process_dialog_waiting">Attendere</string>
+    <string name="attention_message">Attenzione!</string>
+    <string name="toast_server_wrong">Errore! Possibili cause:\nIndirizzo del server sbagliato;\nIl server è spento;\nAssenza connessione Internet</string>
+    <string name="no_server_connection">Problemi di connessione al server!</string>
+    <string name="back_home_advice">Vuoi tornare alla home?</string>
+    <string name="logout_advice">Vuoi effettuare il logout?</string>
+
+
     <!-- Login Activity -->
     <string name="log_hint_mail">Email</string>
     <string name="log_hint_password">Password</string>
     <string name="log_text_accedi">Accedi</string>
     <string name="log_text_registra">Registrati</string>
     <string name="toast_user_password_wrong">Errore!\nUsername e/o password errati.</string>
-    <string name="toast_server_wrong">Errore! Possibili cause:\nIndirizzo del server sbagliato;\nIl server è spento;\nAssenza connessione Internet</string>
     <string name="toast_login_succesful">Il login è andato a buon fine.</string>
-    <string name="attention_message">Attenzione!</string>
     <string name="remember_checkbox">Ricordami</string>
-    <string name="process_dialog_waiting">Attendere</string>
+
 
     <!-- Registration Activity -->
     <string name="first_line">Inserisci i campi</string>
@@ -74,13 +89,25 @@
     <string name="utente_registrato_message">Utente già registrato</string>
     <string name="different_password">La password di controllo non corrisponde a quella inserita!</string>
     <string name="informations_missing">I campi obbligatori non sono stati tutti compilati!</string>
+    <string name="dialog_registration">Registrazione avvenuta con successo</string>
 
-    <!-- Home activity-->
+    <!-- Home Tabs-->
     <string name="title_first_tab">Allarmi Pazienti</string>
     <string name="title_second_tab">Ricerca Paziente</string>
     <string name="title_third_tab">Aggiungi promemoria</string>
 
+    <!-- Menu -->
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_back_home">Torna alla Home</string>
+
     <!--Alerts Fragment-->
+    <string name="no_alerts_dialog">Non ci sono allarmi!</string>
+    <string name="no_unread_alerts_dialog">Non ci sono Allarmi non visualizzati!</string>
+    <string name="text_read">Letto!</string>
+    <string name="text_type">Tipo:</string>
+    <string name="text_message">Message:</string>
+
     <string-array name="alerts_search_ids">
         <item>get_alerts_read_and_notread</item>
         <item>get_list_of_not_read_alerts</item>
@@ -90,7 +117,6 @@
         <item>Visualizza solo gli allarmi non letti</item>
     </string-array>
 
-
     <!-- Search Patient fragment-->
     <string name="title_patient_disease">Seleziona le tipologie di paziente:\n(Possono essere selezionate più opzioni. Un paziente che fa la dialisi peritoneale e che ha fatto le analisi del sangue può essere trovato selezionando o l\'una o l\'altra opzione)</string>
     <string name="title_patient_name">Nome paziente</string>
@@ -98,21 +124,66 @@
     <string name="advice_checkbox_deseases">Selezionando un\'opzione senza inserire il nome vengono selezionati tutti i pazienti per cui è prevista.</string>
     <string name="hint_patient_name">Inserisci nome paziente</string>
     <string name="button_search">Cerca</string>
-
     <string name="toast_no_patient">La ricerca non ha prodotto risultati.</string>
     <string name="toast_no_server">Il Server è spento.</string>
+    
+    <!-- Promemoria fragment -->
+    <string name="select_date_prom">Seleziona giorno ed ora del promemoria</string>
+    <string name="prom_advice">Premi i pulsanti per inserire data e ora del promemoria</string>
+    <string name="prom_day">Giorno</string>
+    <string name="prom_hour">Ora</string>
+    <string name="add_prom">Aggiungi Promemoria</string>
 
-    <!--Home Paziente-->
+    <!-- Sliding Menu Patient -->
+    <string name="home_patient">Home Paziente</string>
+    <string name="parameters">Parametri</string>
+    <string name="diario_clinico">Diario Clinico</string>
+    <string name="esami_sangue">Esami del Sangue</string>
+    <string name="urin_analysis">Analisi Urine</string>
+    <string name="set_thersh_par">Imposta Soglie Parametri</string>
+    <string name="send_mess">Invia un Messaggio</string>
+
+    <!-- Home Paziente -->
+    <string name="home_patient_welcome">Benvenuto nella home del paziente</string>
+    <string name="home_patient_descr">Per accedere ai dati del paziente cliccare sul menu a tendina in alto a sinistra. Per i settings, per tornare alla home e per il logout cliccare sul menu in alto a destra</string>
+
+
+    <!--Parametri Paziente-->
     <string name="label_valori_medi">Valori Medi</string>
     <string name="label_valori_puntuali">Valori Puntuali</string>
     <string name="label_grafici">Grafici</string>
-
-    <string name="parametri">Parametri</string>
-    <string name="diario_clinico">Diario Clinico</string>
-    <string name="esami_sangue">Esami del Sangue</string>
-
-
-    <!--Utils Parameters-->
+    <!-- Parameters -->
+    <string name="syst_string">Pressione Sistolica [mmHg]</string>
+    <string name="diast_string">Pressione Diastolica [mmHg]</string>
+    <string name="spo2_string">SpO2 [%]</string>
+    <string name="hr_string">Frequenza Cardiaca [bpm]</string>
+    <string name="glic_string">Glicemia [mg/dL]</string>
+    <string name="weight_string">Peso [kg]</string>
+    <string name="bmi_string">BMI</string>
+    <string name="fat_body_string">Grasso corporeo [%]</string>
+    <string name="water_body_string">Acqua Corporea [%]</string>
+    <string name="muscle_mass_string">Massa Muscolare [Kg]</string>
+    <string name="bone_mass_string">Massa Ossea [Kg]</string>
+    <!--Parametri Valori Medi-->
+    <string name="no_devices_alert">I dispositivi di monitoraggio dei parametri non sono ancora associati al paziente!</string>
+    <string name="mean_val_description">In questa sezione sono riportati i valori medi di alcuni parametri del paziente, del mese precedente e del mese prima</string>
+    <string name="mean_val_description2">Premere il bottone per inviare la richiesta al server</string>
+    <string name="last_month_string">Ultimo Mese</string>
+    <string name="second_last_month_string">Penultimo Mese</string>
+    <!-- Parametri Valori Puntuali-->
+    <string name="point_val_descr1">In questa sezione è possibile visualizzare tutte le misure effettuate nell'arco del giorno selezionato. Ad ogni misura è associato l'orario in cui è stata effettuata.</string>
+    <string name="point_val_descr2">Inserire la data di interesse nello spazio sottostante e premere il bottone per avviare la ricerca</string>
+    <string name="date_et_string">Cliccare per inserire la data</string>
+    <string name="syst_string2">Sistolica [mmHg]:</string>
+    <string name="diast_string2">Diastolica [mmHg]:</string>
+    <string name="spo2_string2">SpO2 [%]:</string>
+    <string name="hr_string2">Frequenza Cardiaca [bpm]:</string>
+    <string name="glic_string2">Glicemia [mg/dL]:</string>
+    <string name="pv_not_parameters">Nessun parametro misurato in questa data!</string>
+    <string name="pv_not_devices">I dispositivi di monitoraggio dei parametri non sono ancora associati al paziente!</string>
+    <string name="pv_not_valid_date">Inserisci una data valida!</string>
+    <string name="pv_not_date">Non hai inserito nessuna data!</string>
+    <!--Parametri Grafici-->
     <string-array name="mean_selector_names">
         <item>Ultima Settimana</item>
         <item>Ultime Due Settimane</item>
@@ -133,7 +204,6 @@
         <item>heart_rate</item>
         <item>weight</item>
     </string-array>
-
     <string-array name="params_names">
         <item>Pressione sistolica</item>
         <item>Pressione diastolica</item>
@@ -142,18 +212,47 @@
         <item>Frequenza Cardiaca</item>
         <item>Massa</item>
     </string-array>
-
-    <string name="valori_puntuali_interface_description"> Per selezionare le date del range temporale basta cliccare sui due campi di inserimento. Verrà aperta una finestra dalla quale si può selezionare la data</string>
     <string name="graph_interface_description">Cliccare sul bottone per inizializzare il grafico</string>
-    <!-- Esami sangue-->
+    <string name="graph_alert_no_values">Non ci sono valori da mostrare nell'intervallo selezionato!</string>
+    <string name="graph_alert_no_devices">I dispositivi di monitoraggio dei parametri non sono ancora associati al paziente!</string>
+
+
+    <!-- Send Message-->
+    <string name="send_message_label">Invia messaggio a </string>
+    <string name="no_message_string">Nessun messaggio inserito</string>
+    <string name="sending_string">Invio messaggio..</string>
+    <string name="continue_string">Continuare?</string>
+    <string name="message_sent">Messaggio Inviato</string>
+    <string name="sending_problem_string">Problema di connessione!\nImpossibile inviare il messaggio!</string>
+    <string name="send_mess_descr">In questa schermata è possibile inviare un messaggio al paziente. Il messaggio verrà visualizzato nella sua App</string>
+    <string name="dest_string">Destinaratio</string>
+    <string name="write_mess_hint">Scrivi Messaggio..</string>
+
+    <!-- Set thresholds -->
+    <string name="thresh_descr">In questa sezione è possibile visualizzare e modificare le soglie per la generazione di allarmi associati al paziente selezionato. E' sufficiente inserire solo i valori delle soglie che si vogliono modificare. Per fare cio' è necessario premere il bottone in fondo alla pagina.</string>
+    <string name="thresh_current">Soglie Attuali</string>
+    <string name="thresh_max">Soglia Massima</string>
+    <string name="thresh_min">Soglia Minima</string>
+    <string name="thresh_new">Nuove Soglie</string>
+    <string name="thresh_btn">Imposta Nuove Soglie</string>
+    <string name="thresh_succ_string">Richiesta avvenuta con successo!</string>
+    <string name="thresh_prob_string">Problema di connessione!\nImpossibile impostare nuove soglie!</string>
+
+    <!-- Diaries -->
+    <string name="no_analysis">Non ci sono analisi da visualizzare.</string>
+    <string name="diaries_descr1">Cliccare su uno degli elementi della lista per visualizzare il risultato dell'analisi relativo alla data riportata</string>
+
+
+
+
+    <!--Others-->
     <string name="pes1string">Fragment1</string>
     <string name="pes2string">Fragment2</string>
     <string name="title_activity_home_paziente_nav_drawer">HomePazienteNavDrawer</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!--permissions-->
+
     <!-- Permissions -->
     <string name="perm">Non hai concesso un permesso necessario al funzionamento dell\'applicazione. Ciò potrebbe comprometterne il funzionamento.</string>
 

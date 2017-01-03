@@ -80,7 +80,7 @@ public class BloodAnalysisActivity extends BaseActivity {
         final String nome = PatientInfo.getPatient_name();
         final String city = PatientInfo.getPatient_city();
         final String birthdate = PatientInfo.getPatient_birthdate();
-        setTitle(nome+" - Esami del sangue");
+        setTitle(nome+" - "+getString(R.string.esami_sangue));
         tvNome = (TextView)findViewById(R.id.tv_nomePaziente);
         tvCity = (TextView)findViewById(R.id.tv_cittàPaziente);
         tvBirthdate = (TextView)findViewById(R.id.tv_birthPaziente);
@@ -137,8 +137,8 @@ public class BloodAnalysisActivity extends BaseActivity {
 
         if (id == R.id.action_home){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(BloodAnalysisActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi tornare alla home?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.back_home_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -159,8 +159,8 @@ public class BloodAnalysisActivity extends BaseActivity {
 
         if (id == R.id.action_logout){
             AlertDialog.Builder logoutAlert = new AlertDialog.Builder(BloodAnalysisActivity.this);
-            logoutAlert.setTitle("Attenzione!")
-                    .setMessage("Vuoi effettuare il logout?")
+            logoutAlert.setTitle(getString(R.string.attention_message))
+                    .setMessage(getString(R.string.logout_advice))
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -259,7 +259,7 @@ public class BloodAnalysisActivity extends BaseActivity {
 
                                 AlertDialog.Builder wrongParamsAlert = new AlertDialog.Builder(BloodAnalysisActivity.this);
                                 wrongParamsAlert.setTitle(getString(R.string.attention_message))
-                                        .setMessage("Non ci sono analisi da visualizzare")
+                                        .setMessage(getString(R.string.no_analysis))
                                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -277,8 +277,8 @@ public class BloodAnalysisActivity extends BaseActivity {
                         else {
 
                             AlertDialog.Builder noServerAlert = new AlertDialog.Builder(BloodAnalysisActivity.this);
-                            noServerAlert.setTitle("Attenzione!")
-                                    .setMessage("Problemi di connessione al server")
+                            noServerAlert.setTitle(getString(R.string.attention_message))
+                                    .setMessage(getString(R.string.no_server_connection))
                                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {

@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Premi i pulsanti per inserire data e ora del promemoria"
+            android:text="@string/prom_advice"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center"/>
 
@@ -34,7 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="Giorno" />
+                android:text="@string/prom_day" />
             <TextView
                 android:id="@+id/dateEventValue"
                 android:layout_width="0dp"
@@ -55,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="Ora" />
+                android:text="@string/prom_hour" />
             <TextView
                 android:id="@+id/hourEventValue"
                 android:layout_width="0dp"
@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/confirmEvent"
-            android:text="Aggiungi Promemoria"
+            android:text="@string/add_prom"
             android:visibility="visible"/>
 
     </LinearLayout>
